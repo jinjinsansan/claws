@@ -1,0 +1,16 @@
+{
+  "name": "@openclaw/characters",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OPENCLAW Platform - 30体 Claws の構造化キャラクターデータ（HTML から機械抽出）",
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./data/*": "./data/*"
+  },
+  "files": [
+    "data",
+    "index.ts"
+  ]
+}

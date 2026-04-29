@@ -1,0 +1,127 @@
+# =============================================
+# OPENCLAW Platform - Root .gitignore
+# =============================================
+# SPEC-11 §2.2 の方針: シークレットは絶対に commit しない、.env.example のみ。
+
+# -------- Environment Variables / Secrets --------
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.development
+*.env
+
+# 仁さんから渡された初期セットアップ用機密情報（処理後に削除）
+supabase&github.txt
+supabase*github*.txt
+
+# -------- Cloudflare Wrangler --------
+.wrangler/
+.dev.vars
+.dev.vars.*
+wrangler.toml.local
+
+# -------- Blockchain / Foundry --------
+# 秘密鍵・ウォレット
+*.pem
+*.key
+*.keystore
+keystore/
+mnemonic.txt
+private_keys/
+
+# Foundry artifacts
+apps/contracts/cache/
+apps/contracts/out/
+apps/contracts/broadcast/
+apps/contracts/.gas-snapshot
+
+# -------- Node / pnpm / Turborepo --------
+node_modules/
+.pnpm-store/
+.pnpm-debug.log
+.turbo/
+.cache/
+# yarn pnp (legacy from dlc, defensive)
+.pnp/
+.pnp.js
+.yarn/install-state.gz
+
+# -------- Vercel (legacy from dlc, we deploy to Cloudflare Pages) --------
+.vercel/
+
+# -------- Next.js --------
+.next/
+out/
+build/
+dist/
+
+# -------- Supabase --------
+supabase/.branches/
+supabase/.temp/
+supabase/.env
+**/supabase/seed.sql.backup
+
+# -------- TypeScript --------
+*.tsbuildinfo
+next-env.d.ts
+
+# -------- Testing / Coverage --------
+coverage/
+.nyc_output/
+*.lcov
+test-results/
+playwright-report/
+
+# -------- Logs --------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# -------- IDE / Editor --------
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.recommended.json
+*.swp
+*.swo
+.zed/
+.cursor/
+
+# -------- OS --------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# -------- Source ZIPs（仁さんが渡した初期素材、SPECS/ に展開済み）--------
+files.zip
+files (1).zip
+files (2).zip
+spec0001.zip
+
+# -------- Temporary / Misc --------
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+
+# -------- Telegram Bot 関連 --------
+*.session
+sessions/
+
+# -------- Stripe ローカルテスト --------
+stripe-cli-secret*
+
+# -------- ドキュメント生成物 --------
+typedoc/
+docs/api/generated/

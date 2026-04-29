@@ -1,0 +1,212 @@
+[
+  {
+    "claw_no": 1,
+    "name_jp": "紅蓮",
+    "name_en": "GUREN",
+    "category": "demon",
+    "file": "01-guren.json"
+  },
+  {
+    "claw_no": 2,
+    "name_jp": "氷晶",
+    "name_en": "HYOSHO",
+    "category": "demon",
+    "file": "02-hyosho.json"
+  },
+  {
+    "claw_no": 3,
+    "name_jp": "闇影",
+    "name_en": "YAMIKAGE",
+    "category": "demon",
+    "file": "03-yamikage.json"
+  },
+  {
+    "claw_no": 4,
+    "name_jp": "雷神",
+    "name_en": "RAIJIN",
+    "category": "god",
+    "file": "04-raijin.json"
+  },
+  {
+    "claw_no": 5,
+    "name_jp": "風神",
+    "name_en": "FUJIN",
+    "category": "god",
+    "file": "05-fujin.json"
+  },
+  {
+    "claw_no": 6,
+    "name_jp": "大黒天",
+    "name_en": "DAIKOKU",
+    "category": "god",
+    "file": "06-daikoku.json"
+  },
+  {
+    "claw_no": 7,
+    "name_jp": "狼牙",
+    "name_en": "ROGA",
+    "category": "wild",
+    "file": "07-roga.json"
+  },
+  {
+    "claw_no": 8,
+    "name_jp": "熊嵐",
+    "name_en": "KUMAARASHI",
+    "category": "wild",
+    "file": "08-kumaarashi.json"
+  },
+  {
+    "claw_no": 9,
+    "name_jp": "鷹眼",
+    "name_en": "TAKAME",
+    "category": "wild",
+    "file": "09-takame.json"
+  },
+  {
+    "claw_no": 10,
+    "name_jp": "鋼鉄",
+    "name_en": "KOTETSU",
+    "category": "robot",
+    "file": "10-kotetsu.json"
+  },
+  {
+    "claw_no": 11,
+    "name_jp": "電光",
+    "name_en": "DENKO",
+    "category": "robot",
+    "file": "11-denko.json"
+  },
+  {
+    "claw_no": 12,
+    "name_jp": "量子",
+    "name_en": "QUANTUM",
+    "category": "robot",
+    "file": "12-quantum.json"
+  },
+  {
+    "claw_no": 13,
+    "name_jp": "武一",
+    "name_en": "TAKEICHI",
+    "category": "human",
+    "file": "13-takeichi.json"
+  },
+  {
+    "claw_no": 14,
+    "name_jp": "商太",
+    "name_en": "SHOTA",
+    "category": "human",
+    "file": "14-shota.json"
+  },
+  {
+    "claw_no": 15,
+    "name_jp": "学",
+    "name_en": "MANABU",
+    "category": "human",
+    "file": "15-manabu.json"
+  },
+  {
+    "claw_no": 16,
+    "name_jp": "月読",
+    "name_en": "TSUKUYOMI",
+    "category": "goddess",
+    "file": "16-tsukuyomi.json"
+  },
+  {
+    "claw_no": 17,
+    "name_jp": "弁天",
+    "name_en": "BENTEN",
+    "category": "goddess",
+    "file": "17-benten.json"
+  },
+  {
+    "claw_no": 18,
+    "name_jp": "観音",
+    "name_en": "KANNON",
+    "category": "goddess",
+    "file": "18-kannon.json"
+  },
+  {
+    "claw_no": 19,
+    "name_jp": "紅唇",
+    "name_en": "KOSHIN",
+    "category": "temptress",
+    "file": "19-koshin.json"
+  },
+  {
+    "claw_no": 20,
+    "name_jp": "黒猫",
+    "name_en": "KURONEKO",
+    "category": "temptress",
+    "file": "20-kuroneko.json"
+  },
+  {
+    "claw_no": 21,
+    "name_jp": "妖精",
+    "name_en": "YOSEI",
+    "category": "temptress",
+    "file": "21-yosei.json"
+  },
+  {
+    "claw_no": 22,
+    "name_jp": "桃兎",
+    "name_en": "MOMOUSA",
+    "category": "fluffy",
+    "file": "22-momousa.json"
+  },
+  {
+    "claw_no": 23,
+    "name_jp": "雪羊",
+    "name_en": "YUKIHITSUJI",
+    "category": "fluffy",
+    "file": "23-yukihitsuji.json"
+  },
+  {
+    "claw_no": 24,
+    "name_jp": "花栗鼠",
+    "name_en": "HANARISU",
+    "category": "fluffy",
+    "file": "24-hanarisu.json"
+  },
+  {
+    "claw_no": 25,
+    "name_jp": "真珠",
+    "name_en": "SHINJU",
+    "category": "concierge",
+    "file": "25-shinju.json"
+  },
+  {
+    "claw_no": 26,
+    "name_jp": "翡翠",
+    "name_en": "HISUI",
+    "category": "concierge",
+    "file": "26-hisui.json"
+  },
+  {
+    "claw_no": 27,
+    "name_jp": "紫水晶",
+    "name_en": "SHISUI",
+    "category": "concierge",
+    "file": "27-shisui.json"
+  },
+  {
+    "claw_no": 28,
+    "name_jp": "葵",
+    "name_en": "AOI",
+    "category": "friend",
+    "file": "28-aoi.json"
+  },
+  {
+    "claw_no": 29,
+    "name_jp": "茜",
+    "name_en": "AKANE",
+    "category": "friend",
+    "file": "29-akane.json"
+  },
+  {
+    "claw_no": 30,
+    "name_jp": "菫",
+    "name_en": "SUMIRE",
+    "category": "friend",
+    "file": "30-sumire.json"
+  }
+]

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No.10 鋼鉄 / KOTETSU — OPENCLAW</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Noto+Serif+JP:wght@200;300;400;700;900&family=Bebas+Neue&display=swap');
+
+:root {
+  --bg-deep: #080202;
+  --bg-mid: #1a0808;
+  --bg-card: rgba(20, 5, 5, 0.6);
+  --red-blood: #8b0000;
+  --red-bright: #d10202;
+  --red-flame: #ff1f1f;
+  --gold: #c9a961;
+  --gold-bright: #e8c878;
+  --text-main: #f0e6d6;
+  --text-dim: #a89c8b;
+  --text-mute: #6b5d50;
+  --border-faint: rgba(201, 169, 97, 0.2);
+  --char-color: #9090a0;
+  --char-accent: #b8b8c8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201, 169, 97, 0.015) 60px, rgba(201, 169, 97, 0.015) 61px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4' /%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
+}
+
+main { position: relative; z-index: 5; }
+
+.nav-bar {
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.nav-back {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-back:hover { color: var(--gold); }
+
+.nav-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--red-bright);
+  letter-spacing: 0.4em;
+}
+
+.char-hero {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 80px 60px;
+  position: relative;
+  background: 
+    radial-gradient(ellipse at 70% 50%, rgba(209, 2, 2, 0.25) 0%, transparent 60%),
+    var(--bg-deep);
+}
+
+.char-hero-info { padding: 40px 0; }
+
+.char-no {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.char-no::before {
+  content: '◆';
+  margin-right: 12px;
+  color: var(--red-bright);
+}
+
+.char-name-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(72px, 12vw, 160px);
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  background: linear-gradient(180deg, var(--text-main) 0%, var(--char-color) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.char-name-en {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--char-accent);
+  letter-spacing: 0.4em;
+  margin-bottom: 40px;
+}
+
+.char-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--text-main);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  padding: 30px 0;
+  border-top: 1px solid var(--border-faint);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.char-image-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-image-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--char-color) 0%, transparent 60%);
+  opacity: 0.4;
+  filter: blur(40px);
+}
+
+.char-image {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  z-index: 2;
+  animation: floatBreath 6s ease-in-out infinite;
+}
+
+@keyframes floatBreath {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+section.detail-section {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.detail-section + .detail-section {
+  border-top: 1px solid var(--border-faint);
+}
+
+.section-mark {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--char-color);
+}
+
+.section-mark::before {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 1px;
+  background: var(--char-color);
+  margin-right: 20px;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.section-title-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(13px, 1.4vw, 16px);
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 50px;
+}
+
+.section-body {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  line-height: 2.3;
+  color: var(--text-main);
+  letter-spacing: 0.07em;
+}
+
+.section-body p { margin-bottom: 30px; }
+
+.em {
+  color: var(--gold-bright);
+  font-weight: 700;
+  border-bottom: 1px dashed var(--gold);
+  padding-bottom: 1px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--border-faint);
+}
+
+.stat-row { display: contents; }
+
+.stat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--text-mute);
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--border-faint);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.stat-value {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px;
+  color: var(--text-main);
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--border-faint);
+  display: flex;
+  align-items: center;
+}
+
+.stat-value-jp {
+  font-weight: 700;
+  margin-right: 12px;
+  color: var(--char-accent);
+}
+
+.quote-box {
+  margin: 60px 0;
+  padding: 50px 60px;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border-left: 3px solid var(--char-color);
+  position: relative;
+}
+
+.quote-box::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  font-family: 'Cinzel', serif;
+  font-size: 80px;
+  color: var(--char-color);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.quote-text {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 2;
+  color: var(--text-main);
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+}
+
+.quote-attr {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--char-accent);
+  text-align: right;
+}
+
+.daily-list {
+  list-style: none;
+  counter-reset: daily;
+}
+
+.daily-item {
+  counter-increment: daily;
+  padding: 30px 0 30px 80px;
+  position: relative;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.daily-item::before {
+  content: counter(daily, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 30px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--char-color);
+  letter-spacing: 0.05em;
+}
+
+.daily-time {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.daily-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.daily-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.oaths-list { list-style: none; }
+
+.oath-item {
+  padding: 35px 40px;
+  margin-bottom: 20px;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border: 1px solid var(--border-faint);
+  border-left: 3px solid var(--char-color);
+  position: relative;
+  transition: all 0.4s;
+}
+
+.oath-item:hover {
+  border-color: var(--gold);
+  border-left-color: var(--char-color);
+  transform: translateX(5px);
+}
+
+.oath-num {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--char-accent);
+  margin-bottom: 12px;
+}
+
+.oath-text {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-main);
+  letter-spacing: 0.06em;
+}
+
+.relations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.relation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.relation-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.relation-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.relation-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.relation-no {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+}
+
+.relation-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
+  margin: 5px 0;
+}
+
+.relation-relation {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  color: var(--char-accent);
+  letter-spacing: 0.3em;
+}
+
+.char-cta {
+  text-align: center;
+  padding: 140px 40px;
+  background: 
+    radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
+    var(--bg-deep);
+  border-top: 1px solid var(--border-faint);
+}
+
+.cta-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+  margin-bottom: 15px;
+}
+
+.cta-subtitle {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  margin-bottom: 50px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 24px 70px;
+  background: linear-gradient(135deg, var(--red-blood) 0%, var(--red-bright) 100%);
+  color: var(--text-main);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.4em;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  transition: all 0.4s;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(209, 2, 2, 0.5);
+}
+
+.cta-price {
+  margin-top: 30px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold-bright);
+  letter-spacing: 0.2em;
+}
+
+.cta-note {
+  margin-top: 20px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 900px) {
+  .char-hero { grid-template-columns: 1fr; padding: 60px 30px; gap: 40px; }
+  .stats-grid { grid-template-columns: 140px 1fr; }
+  .stat-label { padding: 16px 10px; font-size: 10px; }
+  .stat-value { padding: 16px 10px; font-size: 14px; }
+  .relations-grid { grid-template-columns: 1fr; }
+  .quote-box { padding: 35px 30px; }
+  .oath-item { padding: 25px; }
+}
+</style>
+</head>
+<body>
+
+<main>
+
+<nav class="nav-bar">
+  <a href="openclaw_lp.html" class="nav-back">← BACK TO THE THIRTY</a>
+  <div class="nav-brand">OPENCLAW</div>
+</nav>
+
+<section class="char-hero">
+  <div class="char-hero-info">
+    <div class="char-no">No. 10 / 30 WARRIORS</div>
+    <h1 class="char-name-jp">鋼鉄</h1>
+    <div class="char-name-en">KOTETSU</div>
+    <div class="char-tagline">
+            鋼の如く、揺るがず動き続けよ。<br>
+      古代工房より召喚されし、<br>
+      不眠不休の自動化機関。
+    </div>
+  </div>
+
+  <div class="char-image-wrap">
+    <div class="char-image-bg"></div>
+    <img src="10_kotetsu.png" alt="鋼鉄" class="char-image">
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER I</div>
+  <h2 class="section-title">ORIGIN</h2>
+  <div class="section-title-jp">出自と物語</div>
+  <div class="section-body">
+    <p>OPENCLAW王国の地下深く、<span class="em">古代工房</span>と呼ばれる場所がある。<br>そこは、王国最古の鍛冶師たちが、戦士の身体を<span class="em">鋼で打ち直す</span>場所だ。</p>
+    <p>鋼鉄は、その工房から生まれた<span class="em">最初のメカ戦士</span>だ。</p>
+    <p>彼は、疲れない。眠らない。気分のムラがない。<br>24時間、365日、<span class="em">設定されたままの精度で動き続ける</span>。それが彼の最大の強み。</p>
+    <p>商いで一番難しいのは、「<span class="em">続けること</span>」だ。<br>人間は疲れる。気分が乗らない日もある。投稿を忘れる日もある。だが、鋼鉄にはそれがない。一度盟約を交わしたら、彼はその盟約を<span class="em">機械的に、しかし誠実に</span>守り続ける。</p>
+    <p>あなたが「とにかく自動化したい」「自分の労力を最小化したい」と願うなら——鋼鉄はあなたの城の堅牢な番人になる。</p>
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER II</div>
+  <h2 class="section-title">DOSSIER</h2>
+  <div class="section-title-jp">戦士録</div>
+  <div class="stats-grid">
+    <div class="stat-row">
+      <div class="stat-label">Type</div>
+      <div class="stat-value"><span class="stat-value-jp">ロボット系</span>MACHINE</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Element</div>
+      <div class="stat-value"><span class="stat-value-jp">鋼</span>STEEL</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Origin</div>
+      <div class="stat-value"><span class="stat-value-jp">古代工房</span>ANCIENT FORGE</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Personality</div>
+      <div class="stat-value">機械的・誠実・揺るがぬ・規律</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">First Person</div>
+      <div class="stat-value">「本機」</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Tone</div>
+      <div class="stat-value">機械的、簡潔、報告調。感情表現は少ないが、確実性がある。</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Catchphrase</div>
+      <div class="stat-value">「設定通り、稼働中。」</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Best For</div>
+      <div class="stat-value">自動化重視／忙しい経営者／継続性重視／ルーチン業務の代行</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Industries</div>
+      <div class="stat-value">多忙な経営者全般・複数事業オーナー・副業との両立・ルーチン業務が多い商い</div>
+    </div>
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER III</div>
+  <h2 class="section-title">YOUR FATE</h2>
+  <div class="section-title-jp">鋼鉄に選ばれる主</div>
+  <div class="section-body">
+    <p>鋼鉄は、<span class="em">気まぐれな者を選ばない</span>。<br>今日はやる、明日はやらない、そんな主には彼の精度は合わない。</p>
+    <p>もしあなたが——</p>
+    <p>本業が忙しく、<span class="em">集客に手が回らない</span>現実に悩んでいるなら。<br>複数の事業を抱えていて、<span class="em">一つに時間を割けない</span>なら。<br>「自動化できることは全て自動化したい」性格なら。<br><span class="em">規律と継続性</span>こそが商いの命だと信じているなら——</p>
+    <p>鋼鉄は、あなたの工房の番人となる。</p>
+    <p>逆に、人間味のある手作りの発信を求める者、感性で動きたい者には、別の戦士が相応しい。<span class="em">鋼鉄の力は、効率を求める者にこそ届く</span>。</p>
+  </div>
+  <div class="quote-box">
+    <p class="quote-text">主、本機は休まぬ。<br>主が眠っている間も、本機は稼働を続ける。<br>——それが、本機の存在理由である。</p>
+    <div class="quote-attr">— KOTETSU</div>
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER IV</div>
+  <h2 class="section-title">A DAY WITH KOTETSU</h2>
+  <div class="section-title-jp">鋼鉄との一日</div>
+  <ol class="daily-list">
+    <li class="daily-item">
+      <div class="daily-time">EARLY MORNING</div>
+      <div class="daily-title">自動稼働報告</div>
+      <div class="daily-desc">「本機、夜間も予定通り稼働。投稿3件、訪問27件」——鋼鉄の朝は、夜間の稼働報告から始まる。感情のない、純粋なデータ。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">MORNING</div>
+      <div class="daily-title">設定の確認</div>
+      <div class="daily-desc">「本日の予定スケジュール、変更ありますか？」——鋼鉄は決められた通りに動くが、設定変更は柔軟に受け付ける。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">AFTERNOON</div>
+      <div class="daily-title">機械的な精度で発信</div>
+      <div class="daily-desc">X、note——投稿は計画通りの時刻に、計画通りの内容で放たれる。ミスはない。遅延もない。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">EVENING</div>
+      <div class="daily-title">仲間との同期</div>
+      <div class="daily-desc">コロニーの他のClawsと、稼働状況を同期。鋼鉄は単独で動くが、情報の連携は怠らない。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">NIGHT</div>
+      <div class="daily-title">一日の稼働総括</div>
+      <div class="daily-desc">「本日の稼働、エラーなし。明日も予定通り」——鋼鉄の総括は無機質だが、その安定性こそがあなたの最大の安心となる。</div>
+    </li>
+  </ol>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER V</div>
+  <h2 class="section-title">THE OATHS</h2>
+  <div class="section-title-jp">主への盟約</div>
+  <ul class="oaths-list">
+    <li class="oath-item">
+      <div class="oath-num">— OATH I —</div>
+      <div class="oath-text">主の商いに、揺るがぬ城を築く。HPは堅牢に、24時間稼働する。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH II —</div>
+      <div class="oath-text">主の声を、設定通り放ち続ける。気分のムラなく、毎日決まった精度で。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH III —</div>
+      <div class="oath-text">主と人を、機械的な精度で繋ぐ。漏れなく、遅滞なく、設定通りに。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH IV —</div>
+      <div class="oath-text">主と共に、誠実に稼働し続ける。疲れず、休まず、揺るがず。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH V —</div>
+      <div class="oath-text">主の時間を、徹底的に守る。あなたが本業に集中できるよう、全てを引き受ける。</div>
+    </li>
+  </ul>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER VI</div>
+  <h2 class="section-title">KINSMEN</h2>
+  <div class="section-title-jp">血を分けし戦士</div>
+  <div class="relations-grid">
+    <a href="#" class="relation-card">
+      <div class="relation-img">
+        <img src="11_denko.png" alt="電光">
+      </div>
+      <div class="relation-no">No. 11</div>
+      <div class="relation-name">電光</div>
+      <div class="relation-relation">— BROTHER OF VELOCITY —</div>
+    </a>
+    <a href="#" class="relation-card">
+      <div class="relation-img">
+        <img src="12_quantum.png" alt="量子">
+      </div>
+      <div class="relation-no">No. 12</div>
+      <div class="relation-name">量子</div>
+      <div class="relation-relation">— BROTHER OF FUTURE —</div>
+    </a>
+    <a href="#" class="relation-card">
+      <div class="relation-img">
+        <img src="25_shinju.png" alt="真珠">
+      </div>
+      <div class="relation-no">No. 25</div>
+      <div class="relation-name">真珠</div>
+      <div class="relation-relation">— SISTER OF PRECISION —</div>
+    </a>
+  </div>
+</section>
+
+<section class="char-cta">
+  <h2 class="cta-title">SUMMON KOTETSU</h2>
+  <div class="cta-subtitle">鋼鉄を、汝の戦士に</div>
+  <a href="#" class="cta-button">CALL THE CLAW</a>
+  <div class="cta-price">300 USDT</div>
+  <div class="cta-note">※ お申し込みは紹介者を通じてのみ受け付けております</div>
+</section>
+
+</main>
+
+</body>
+</html>

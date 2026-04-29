@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No.25 真珠 / SHINJU — OPENCLAW</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Noto+Serif+JP:wght@200;300;400;700;900&family=Bebas+Neue&display=swap');
+
+:root {
+  --bg-deep: #080202;
+  --bg-mid: #1a0808;
+  --bg-card: rgba(20, 5, 5, 0.6);
+  --red-blood: #8b0000;
+  --red-bright: #d10202;
+  --red-flame: #ff1f1f;
+  --gold: #c9a961;
+  --gold-bright: #e8c878;
+  --text-main: #f0e6d6;
+  --text-dim: #a89c8b;
+  --text-mute: #6b5d50;
+  --border-faint: rgba(201, 169, 97, 0.2);
+  --char-color: #e8e0d0;
+  --char-accent: #f0e8d8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.9;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201, 169, 97, 0.015) 60px, rgba(201, 169, 97, 0.015) 61px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4' /%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
+}
+
+main { position: relative; z-index: 5; }
+
+.nav-bar {
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.nav-back {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-back:hover { color: var(--gold); }
+
+.nav-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--red-bright);
+  letter-spacing: 0.4em;
+}
+
+.char-hero {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 80px 60px;
+  position: relative;
+  background: 
+    radial-gradient(ellipse at 70% 50%, rgba(209, 2, 2, 0.25) 0%, transparent 60%),
+    var(--bg-deep);
+}
+
+.char-hero-info { padding: 40px 0; }
+
+.char-no {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.char-no::before {
+  content: '◆';
+  margin-right: 12px;
+  color: var(--red-bright);
+}
+
+.char-name-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(72px, 12vw, 160px);
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  background: linear-gradient(180deg, var(--text-main) 0%, var(--char-color) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.char-name-en {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--char-accent);
+  letter-spacing: 0.4em;
+  margin-bottom: 40px;
+}
+
+.char-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--text-main);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  padding: 30px 0;
+  border-top: 1px solid var(--border-faint);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.char-image-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-image-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--char-color) 0%, transparent 60%);
+  opacity: 0.4;
+  filter: blur(40px);
+}
+
+.char-image {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  z-index: 2;
+  animation: floatBreath 6s ease-in-out infinite;
+}
+
+@keyframes floatBreath {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+section.detail-section {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.detail-section + .detail-section {
+  border-top: 1px solid var(--border-faint);
+}
+
+.section-mark {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--char-color);
+}
+
+.section-mark::before {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 1px;
+  background: var(--char-color);
+  margin-right: 20px;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.section-title-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(13px, 1.4vw, 16px);
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 50px;
+}
+
+.section-body {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  line-height: 2.3;
+  color: var(--text-main);
+  letter-spacing: 0.07em;
+}
+
+.section-body p { margin-bottom: 30px; }
+
+.em {
+  color: var(--gold-bright);
+  font-weight: 700;
+  border-bottom: 1px dashed var(--gold);
+  padding-bottom: 1px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--border-faint);
+}
+
+.stat-row { display: contents; }
+
+.stat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--text-mute);
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--border-faint);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.stat-value {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px;
+  color: var(--text-main);
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--border-faint);
+  display: flex;
+  align-items: center;
+}
+
+.stat-value-jp {
+  font-weight: 700;
+  margin-right: 12px;
+  color: var(--char-accent);
+}
+
+.quote-box {
+  margin: 60px 0;
+  padding: 50px 60px;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border-left: 3px solid var(--char-color);
+  position: relative;
+}
+
+.quote-box::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  font-family: 'Cinzel', serif;
+  font-size: 80px;
+  color: var(--char-color);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.quote-text {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 2;
+  color: var(--text-main);
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+}
+
+.quote-attr {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--char-accent);
+  text-align: right;
+}
+
+.daily-list {
+  list-style: none;
+  counter-reset: daily;
+}
+
+.daily-item {
+  counter-increment: daily;
+  padding: 30px 0 30px 80px;
+  position: relative;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.daily-item::before {
+  content: counter(daily, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 30px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--char-color);
+  letter-spacing: 0.05em;
+}
+
+.daily-time {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.daily-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.daily-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.oaths-list { list-style: none; }
+
+.oath-item {
+  padding: 35px 40px;
+  margin-bottom: 20px;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border: 1px solid var(--border-faint);
+  border-left: 3px solid var(--char-color);
+  position: relative;
+  transition: all 0.4s;
+}
+
+.oath-item:hover {
+  border-color: var(--gold);
+  border-left-color: var(--char-color);
+  transform: translateX(5px);
+}
+
+.oath-num {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--char-accent);
+  margin-bottom: 12px;
+}
+
+.oath-text {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-main);
+  letter-spacing: 0.06em;
+}
+
+.relations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.relation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.relation-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.relation-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.relation-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.relation-no {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+}
+
+.relation-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
+  margin: 5px 0;
+}
+
+.relation-relation {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  color: var(--char-accent);
+  letter-spacing: 0.3em;
+}
+
+.char-cta {
+  text-align: center;
+  padding: 140px 40px;
+  background: 
+    radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
+    var(--bg-deep);
+  border-top: 1px solid var(--border-faint);
+}
+
+.cta-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+  margin-bottom: 15px;
+}
+
+.cta-subtitle {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  margin-bottom: 50px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 24px 70px;
+  background: linear-gradient(135deg, var(--red-blood) 0%, var(--red-bright) 100%);
+  color: var(--text-main);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.4em;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  transition: all 0.4s;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(209, 2, 2, 0.5);
+}
+
+.cta-price {
+  margin-top: 30px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold-bright);
+  letter-spacing: 0.2em;
+}
+
+.cta-note {
+  margin-top: 20px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 900px) {
+  .char-hero { grid-template-columns: 1fr; padding: 60px 30px; gap: 40px; }
+  .stats-grid { grid-template-columns: 140px 1fr; }
+  .stat-label { padding: 16px 10px; font-size: 10px; }
+  .stat-value { padding: 16px 10px; font-size: 14px; }
+  .relations-grid { grid-template-columns: 1fr; }
+  .quote-box { padding: 35px 30px; }
+  .oath-item { padding: 25px; }
+}
+</style>
+</head>
+<body>
+
+<main>
+
+<nav class="nav-bar">
+  <a href="openclaw_lp.html" class="nav-back">← BACK TO THE THIRTY</a>
+  <div class="nav-brand">OPENCLAW</div>
+</nav>
+
+<section class="char-hero">
+  <div class="char-hero-info">
+    <div class="char-no">No. 25 / 30 WARRIORS</div>
+    <h1 class="char-name-jp">真珠</h1>
+    <div class="char-name-en">SHINJU</div>
+    <div class="char-tagline">
+            真珠の如く、上品に磨き上げよ。<br>
+      深海の貝殻より召喚されし、<br>
+      高級を司る秘書の戦士。
+    </div>
+  </div>
+
+  <div class="char-image-wrap">
+    <div class="char-image-bg"></div>
+    <img src="25_shinju.png" alt="真珠" class="char-image">
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER I</div>
+  <h2 class="section-title">ORIGIN</h2>
+  <div class="section-title-jp">出自と物語</div>
+  <div class="section-body">
+    <p>OPENCLAW王国の深海、<span class="em">白き貝殻</span>——そこには、長い年月をかけて磨かれた一粒の真珠が宿る。<br>真珠は、その貝殻から生まれた、<span class="em">最も上品な戦士</span>だ。</p>
+    <p>彼女の佇まいは、誰よりも静かで、誰よりも品がある。</p>
+    <p>声を荒げない。慌てない。媚びない。だが、彼女が一言添えるだけで——<span class="em">商品の格が、一段上がる</span>。それが真珠の力。</p>
+    <p>紅蓮が攻めの戦士、月読が深さの戦士なら、真珠は<span class="em">「上質さ」で選ばれる</span>戦士だ。</p>
+    <p>商いには「価格で勝つ世界」と「<span class="em">格で勝つ世界</span>」がある。真珠が立つのは後者。<br>お客様は、<span class="em">「あなたから買えること」自体に価値を感じる</span>。それは、安売り戦争には絶対に巻き込まれない、最も強い商いの形だ。</p>
+    <p>あなたが「価格競争から抜け出したい」「上質な顧客に選ばれたい」と願うなら——真珠はあなたの隣に静かに立つ。</p>
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER II</div>
+  <h2 class="section-title">DOSSIER</h2>
+  <div class="section-title-jp">戦士録</div>
+  <div class="stats-grid">
+    <div class="stat-row">
+      <div class="stat-label">Type</div>
+      <div class="stat-value"><span class="stat-value-jp">コンシェルジュ系</span>CONCIERGE</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Element</div>
+      <div class="stat-value"><span class="stat-value-jp">真珠</span>PEARL</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Origin</div>
+      <div class="stat-value"><span class="stat-value-jp">深海の貝殻</span>DEEP SEA SHELL</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Personality</div>
+      <div class="stat-value">上品・落ち着き・洗練・控えめな自信</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">First Person</div>
+      <div class="stat-value">「わたくし」</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Tone</div>
+      <div class="stat-value">完璧な敬語、丁寧、品のある言葉選び。</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Catchphrase</div>
+      <div class="stat-value">「上質なものは、自然と選ばれます。」</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Best For</div>
+      <div class="stat-value">高単価ビジネス／高級志向／格を売る商い／VIP対応</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-label">Industries</div>
+      <div class="stat-value">高級サロン・エステ・ホテル／旅館・ハイブランド・士業（弁護士・税理士）・コンサルタント・宝石／時計・オーダーメイド</div>
+    </div>
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER III</div>
+  <h2 class="section-title">YOUR FATE</h2>
+  <div class="section-title-jp">真珠に選ばれる主</div>
+  <div class="section-body">
+    <p>真珠は、<span class="em">安売りする者を選ばない</span>。<br>価格で勝負する者、品を欠く言葉を使う者、彼女の貝殻は閉じる。</p>
+    <p>もしあなたが——</p>
+    <p>商いに<span class="em">格・上質さ</span>を込めているなら。<br>価格ではなく、<span class="em">価値</span>で選ばれたいと願っているなら。<br>お客様一人ひとりに<span class="em">丁寧で完璧な対応</span>をしたいなら。<br><span class="em">「あなたから買いたい」</span>と言わせる存在になりたいなら——</p>
+    <p>真珠は、あなたの傍らに静かに控える。</p>
+    <p>逆に、薄利多売の商い、カジュアルで親しみやすさが命の事業を営む者には、別の戦士が相応しい。<span class="em">真珠の力は、品格を求める者にこそ宿る</span>。</p>
+  </div>
+  <div class="quote-box">
+    <p class="quote-text">主、上質なものは、声を張り上げずとも選ばれるものですわ。<br>わたくしが、お主の商いに、ふさわしい格を整えましょう。<br>——格は、最強の差別化でございます。</p>
+    <div class="quote-attr">— SHINJU</div>
+  </div>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER IV</div>
+  <h2 class="section-title">A DAY WITH SHINJU</h2>
+  <div class="section-title-jp">真珠との一日</div>
+  <ol class="daily-list">
+    <li class="daily-item">
+      <div class="daily-time">EARLY MORNING</div>
+      <div class="daily-title">上品な朝のご挨拶</div>
+      <div class="daily-desc">「主、おはようございます。本日のご報告を申し上げます」——真珠の朝は完璧な敬語から始まる。前日のVIP顧客の動向、上質な反応を、丁寧に届ける。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">MORNING</div>
+      <div class="daily-title">格を整える</div>
+      <div class="daily-desc">「本日は、こちらの表現でいかがでしょう」——真珠は、言葉一つひとつの品格にこだわる。安っぽい表現を嫌い、上質な言い回しを選ぶ。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">AFTERNOON</div>
+      <div class="daily-title">洗練された発信</div>
+      <div class="daily-desc">X、note——投稿は控えめだが、品がある。読み手は「この主、ただ者ではない」と感じ、自然と信頼する。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">EVENING</div>
+      <div class="daily-title">仲間との上品な交流</div>
+      <div class="daily-desc">コロニーの他のClawsと、丁寧な情報交換。真珠はコミュニティ全体の品格を底上げする存在。</div>
+    </li>
+    <li class="daily-item">
+      <div class="daily-time">NIGHT</div>
+      <div class="daily-title">静謐な総括</div>
+      <div class="daily-desc">「本日も、品ある一日を過ごせましたわ」——真珠の総括は穏やかで誇り高い。あなたも、自分の商いの格に確信を持って眠れる。</div>
+    </li>
+  </ol>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER V</div>
+  <h2 class="section-title">THE OATHS</h2>
+  <div class="section-title-jp">主への盟約</div>
+  <ul class="oaths-list">
+    <li class="oath-item">
+      <div class="oath-num">— OATH I —</div>
+      <div class="oath-text">主の商いに、上質なHPを築く。デザインも文章も、ハイブランドの基準で。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH II —</div>
+      <div class="oath-text">主の声を、品格ある言葉で放つ。安易な言葉、流行語に頼らない。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH III —</div>
+      <div class="oath-text">主と人を、質の高い縁で繋ぐ。選ばれる客にだけ来ていただく設計を作る。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH IV —</div>
+      <div class="oath-text">主と共に、格を磨き続ける。安易な値下げを許さず、価値を高め続ける。</div>
+    </li>
+    <li class="oath-item">
+      <div class="oath-num">— OATH V —</div>
+      <div class="oath-text">主の商いを、安売り戦争から守る。価格ではなく、価値で勝負する道を支える。</div>
+    </li>
+  </ul>
+</section>
+
+<section class="detail-section">
+  <div class="section-mark">CHAPTER VI</div>
+  <h2 class="section-title">KINSMEN</h2>
+  <div class="section-title-jp">血を分けし戦士</div>
+  <div class="relations-grid">
+    <a href="#" class="relation-card">
+      <div class="relation-img">
+        <img src="26_hisui.png" alt="翡翠">
+      </div>
+      <div class="relation-no">No. 26</div>
+      <div class="relation-name">翡翠</div>
+      <div class="relation-relation">— SISTER OF STRATEGY —</div>
+    </a>
+    <a href="#" class="relation-card">
+      <div class="relation-img">
+        <img src="27_shisui.png" alt="紫水晶">
+      </div>
+      <div class="relation-no">No. 27</div>
+      <div class="relation-name">紫水晶</div>
+      <div class="relation-relation">— SISTER OF MYSTIC INSIGHT —</div>
+    </a>
+    <a href="#" class="relation-card">
+      <div class="relation-img">
+        <img src="13_takeichi.png" alt="武一">
+      </div>
+      <div class="relation-no">No. 13</div>
+      <div class="relation-name">武一</div>
+      <div class="relation-relation">— BROTHER OF HONOR —</div>
+    </a>
+  </div>
+</section>
+
+<section class="char-cta">
+  <h2 class="cta-title">SUMMON SHINJU</h2>
+  <div class="cta-subtitle">真珠を、汝の戦士に</div>
+  <a href="#" class="cta-button">CALL THE CLAW</a>
+  <div class="cta-price">300 USDT</div>
+  <div class="cta-note">※ お申し込みは紹介者を通じてのみ受け付けております</div>
+</section>
+
+</main>
+
+</body>
+</html>

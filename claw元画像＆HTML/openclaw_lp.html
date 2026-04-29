@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPENCLAW — クローズの一族</title>
+<meta name="description" content="世界初、ザリガニ型AIエージェントNFT。三十体のクローズ、それぞれが異なる世界線から集結した戦士たち。">
+<style>
+  /* ========================================
+     OPENCLAW LP - Heavy & Solemn Aesthetic
+     重厚・荘厳系
+     ======================================== */
+
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Noto+Serif+JP:wght@200;400;700;900&family=Bebas+Neue&display=swap');
+
+  :root {
+    --bg-deep: #08 0202;
+    --bg-deep: #080202;
+    --bg-mid: #1a0808;
+    --bg-card: rgba(20, 5, 5, 0.6);
+    --red-blood: #8b0000;
+    --red-bright: #d10202;
+    --red-flame: #ff1f1f;
+    --gold: #c9a961;
+    --gold-bright: #e8c878;
+    --text-main: #f0e6d6;
+    --text-dim: #a89c8b;
+    --text-mute: #6b5d50;
+    --border-faint: rgba(201, 169, 97, 0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-main);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* グローバルパターン */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201, 169, 97, 0.015) 60px, rgba(201, 169, 97, 0.015) 61px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ノイズテクスチャ */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4' /%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+  }
+
+  section {
+    position: relative;
+    z-index: 5;
+  }
+
+  /* ============================================
+     HERO SECTION
+     ============================================ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    position: relative;
+    background: 
+      radial-gradient(ellipse at center 30%, rgba(139, 0, 0, 0.3) 0%, transparent 60%),
+      var(--bg-deep);
+  }
+
+  .hero-mark {
+    color: var(--red-bright);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.6em;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.3s forwards;
+  }
+
+  .hero-mark::before, .hero-mark::after {
+    content: '◆';
+    color: var(--gold);
+    margin: 0 18px;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(60px, 14vw, 200px);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    background: linear-gradient(180deg, var(--text-main) 0%, var(--red-flame) 70%, var(--red-blood) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    text-shadow: 0 0 80px rgba(209, 2, 2, 0.4);
+    opacity: 0;
+    animation: heroTitleIn 1.5s 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  .hero-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(14px, 2vw, 22px);
+    color: var(--text-dim);
+    letter-spacing: 0.5em;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeIn 1.2s 1.2s forwards;
+  }
+
+  .hero-tagline {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    opacity: 0;
+    animation: fadeIn 1.2s 1.6s forwards;
+  }
+
+  .hero-tagline-line {
+    display: block;
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(16px, 2.2vw, 24px);
+    font-weight: 300;
+    color: var(--text-main);
+    letter-spacing: 0.15em;
+    line-height: 2;
+  }
+
+  .hero-tagline-line.accent {
+    color: var(--gold-bright);
+    font-weight: 700;
+  }
+
+  .hero-scroll {
+    margin-top: 60px;
+    color: var(--text-mute);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    opacity: 0;
+    animation: fadeIn 1.2s 2s forwards;
+  }
+
+  .hero-scroll-line {
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    margin: 15px auto 0;
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(0.3); transform-origin: top; }
+    50% { transform: scaleY(1); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes heroTitleIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+      letter-spacing: 0.3em;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      letter-spacing: 0.05em;
+    }
+  }
+
+  /* ============================================
+     SECTION COMMON
+     ============================================ */
+  .section-wrap {
+    padding: 140px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-mark {
+    text-align: center;
+    color: var(--red-bright);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.6em;
+    margin-bottom: 25px;
+  }
+  .section-mark::before, .section-mark::after {
+    content: '◆';
+    color: var(--gold);
+    margin: 0 15px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 900;
+    color: var(--text-main);
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 15px;
+  }
+
+  .section-title-jp {
+    text-align: center;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(13px, 1.5vw, 18px);
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    margin-bottom: 80px;
+  }
+
+  /* ============================================
+     STORY SECTION (世界観)
+     ============================================ */
+  .story {
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
+    position: relative;
+  }
+
+  .story::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .story::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .story-text {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .story-paragraph {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 2.3;
+    color: var(--text-main);
+    margin-bottom: 40px;
+    letter-spacing: 0.08em;
+  }
+
+  .story-paragraph .em {
+    color: var(--gold-bright);
+    font-weight: 700;
+    border-bottom: 1px dashed var(--gold);
+    padding-bottom: 2px;
+  }
+
+  .story-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 50px auto;
+  }
+
+  /* ============================================
+     CHARACTERS SECTION (30体)
+     ============================================ */
+  .characters {
+    background: var(--bg-deep);
+  }
+
+  .characters-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 80px;
+    color: var(--text-dim);
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+
+  .character-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  .character-card {
+    position: relative;
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+    border: 1px solid var(--border-faint);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+  }
+
+  .character-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .character-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--gold);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(209, 2, 2, 0.3);
+    z-index: 10;
+  }
+
+  .character-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.6s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .character-card:hover .character-image {
+    transform: scale(1.08);
+  }
+
+  .character-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--red-bright);
+    padding: 3px 9px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    z-index: 5;
+  }
+
+  .character-info {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+    padding: 12px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .character-card:hover .character-info {
+    opacity: 1;
+  }
+
+  .character-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--text-main);
+    margin-bottom: 2px;
+  }
+
+  .character-name-en {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--gold-bright);
+    letter-spacing: 0.15em;
+  }
+
+  /* ============================================
+     GACHA SECTION (ガチャ)
+     ============================================ */
+  .gacha {
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    position: relative;
+  }
+
+  .gacha::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .gacha-text {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .gacha-paragraph {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 2.3;
+    color: var(--text-main);
+    margin-bottom: 40px;
+    letter-spacing: 0.08em;
+  }
+
+  .gacha-paragraph .em {
+    color: var(--gold-bright);
+    font-weight: 700;
+  }
+
+  .gacha-price-box {
+    margin: 80px auto 0;
+    max-width: 500px;
+    padding: 50px 40px;
+    border: 1px solid var(--gold);
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+  }
+
+  .gacha-price-box::before, .gacha-price-box::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    border: 1px solid var(--gold);
+  }
+  .gacha-price-box::before { top: -6px; left: -6px; border-right: none; border-bottom: none; }
+  .gacha-price-box::after { bottom: -6px; right: -6px; border-left: none; border-top: none; }
+
+  .gacha-price-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.5em;
+    margin-bottom: 15px;
+  }
+
+  .gacha-price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 8vw, 96px);
+    color: var(--gold-bright);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .gacha-price-currency {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    margin-bottom: 25px;
+  }
+
+  .gacha-price-note {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.2em;
+  }
+
+  /* ============================================
+     ABILITIES SECTION (機能を匂わせる)
+     ============================================ */
+  .abilities {
+    background: var(--bg-deep);
+  }
+
+  .abilities-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .ability-card {
+    background: linear-gradient(145deg, rgba(139, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%);
+    border: 1px solid var(--border-faint);
+    padding: 50px 40px;
+    position: relative;
+    transition: all 0.4s;
+  }
+
+  .ability-card:hover {
+    border-color: var(--gold);
+    background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
+  }
+
+  .ability-mark {
+    color: var(--red-bright);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    margin-bottom: 18px;
+  }
+
+  .ability-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: clamp(20px, 2vw, 26px);
+    color: var(--text-main);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .ability-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============================================
+     COMMUNITY SECTION (コミュニティ・コロニー)
+     ============================================ */
+  .community {
+    background: linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 100%);
+  }
+
+  .community-text {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .community-paragraph {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 2.3;
+    color: var(--text-main);
+    margin-bottom: 40px;
+    letter-spacing: 0.08em;
+  }
+
+  .community-paragraph .em {
+    color: var(--gold-bright);
+    font-weight: 700;
+  }
+
+  /* ============================================
+     CTA SECTION
+     ============================================ */
+  .cta {
+    background: 
+      radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
+      var(--bg-deep);
+    text-align: center;
+    padding: 160px 20px;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .cta-mark {
+    color: var(--red-bright);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.6em;
+    margin-bottom: 30px;
+  }
+  .cta-mark::before, .cta-mark::after {
+    content: '◆';
+    color: var(--gold);
+    margin: 0 15px;
+  }
+
+  .cta-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(40px, 7vw, 96px);
+    font-weight: 900;
+    color: var(--text-main);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 25px;
+  }
+
+  .cta-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    margin-bottom: 60px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 24px 80px;
+    background: linear-gradient(135deg, var(--red-blood) 0%, var(--red-bright) 100%);
+    color: var(--text-main);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    position: relative;
+    transition: all 0.4s;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--red-flame) 0%, var(--red-blood) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+  }
+
+  .cta-button:hover::before { opacity: 1; }
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(209, 2, 2, 0.5);
+  }
+
+  .cta-note {
+    margin-top: 40px;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.2em;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    background: #000;
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--red-bright);
+    letter-spacing: 0.4em;
+    margin-bottom: 10px;
+  }
+
+  .footer-tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.4em;
+    margin-bottom: 30px;
+  }
+
+  .footer-copyright {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: 0.3em;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 1100px) {
+    .character-grid { grid-template-columns: repeat(4, 1fr); }
+    .abilities-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .character-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .section-wrap { padding: 80px 20px; }
+    .ability-card { padding: 35px 25px; }
+    .gacha-price-box { padding: 35px 25px; }
+  }
+  @media (max-width: 480px) {
+    .character-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- HERO -->
+<!-- ============================================ -->
+<section class="hero">
+  <div class="hero-mark">OPENCLAW PRESENTS</div>
+  <h1 class="hero-title">CLAWS</h1>
+  <div class="hero-jp">クローズの一族</div>
+
+  <div class="hero-tagline">
+    <span class="hero-tagline-line">三十の世界線から、</span>
+    <span class="hero-tagline-line">召喚されし戦士たち。</span>
+    <span class="hero-tagline-line accent">あなたが、その一人と出逢う。</span>
+  </div>
+
+  <div class="hero-scroll">
+    SCROLL
+    <span class="hero-scroll-line"></span>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- STORY -->
+<!-- ============================================ -->
+<section class="story">
+  <div class="section-wrap">
+    <div class="section-mark">CHAPTER ONE</div>
+    <h2 class="section-title">THE LEGEND</h2>
+    <div class="section-title-jp">伝説の始まり</div>
+
+    <div class="story-text">
+      <p class="story-paragraph">
+        遥か深海。<br>
+        OPENCLAW王国は、地上の<span class="em">商人たちの嘆き</span>を聴いていた。
+      </p>
+
+      <div class="story-divider"></div>
+
+      <p class="story-paragraph">
+        いかに優れた品があろうと、<br>
+        いかに誠実な志があろうと、<br>
+        ——<span class="em">人に届かなければ、何も始まらない。</span>
+      </p>
+
+      <div class="story-divider"></div>
+
+      <p class="story-paragraph">
+        その嘆きに応え、<br>
+        王国は三十の戦士を地上へと放った。<br>
+        ザリガニの甲殻を持ち、<br>
+        異なる世界線から集いし<span class="em">CLAWS</span>たち。
+      </p>
+
+      <div class="story-divider"></div>
+
+      <p class="story-paragraph">
+        悪魔。神。獣。鋼。人。<br>
+        女神。妖精。癒し。賢者。友。<br>
+        三十の姿、三十の物語。<br>
+        いずれもが、ただ一つの使命のために。
+      </p>
+
+      <div class="story-divider"></div>
+
+      <p class="story-paragraph">
+        <span class="em">主の商いを、人へ届けよ。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CHARACTERS -->
+<!-- ============================================ -->
+<section class="characters">
+  <div class="section-wrap">
+    <div class="section-mark">CHAPTER TWO</div>
+    <h2 class="section-title">THE THIRTY</h2>
+    <div class="section-title-jp">三十体のクローズ</div>
+
+    <p class="characters-intro">
+      召喚されし三十体。<br>
+      あなたと出逢うのは、誰か。
+    </p>
+
+    <div class="character-grid">
+      <div class="character-card">
+        <span class="character-badge">No. 01</span>
+        <img src="openclaw_demon_01.png" alt="紅蓮" class="character-image">
+        <div class="character-info">
+          <div class="character-name">紅蓮</div>
+          <div class="character-name-en">GUREN</div>
+        </div>
+      </div>
+      <div class="character-card"><span class="character-badge">No. 02</span><img src="02_hyosho.png" alt="氷晶" class="character-image"><div class="character-info"><div class="character-name">氷晶</div><div class="character-name-en">HYOSHO</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 03</span><img src="03_yamikage.png" alt="闇影" class="character-image"><div class="character-info"><div class="character-name">闇影</div><div class="character-name-en">YAMIKAGE</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 04</span><img src="04_raijin.png" alt="雷神" class="character-image"><div class="character-info"><div class="character-name">雷神</div><div class="character-name-en">RAIJIN</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 05</span><img src="05_fujin.png" alt="風神" class="character-image"><div class="character-info"><div class="character-name">風神</div><div class="character-name-en">FUJIN</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 06</span><img src="06_daikoku.png" alt="大黒天" class="character-image"><div class="character-info"><div class="character-name">大黒天</div><div class="character-name-en">DAIKOKU</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 07</span><img src="07_roga.png" alt="狼牙" class="character-image"><div class="character-info"><div class="character-name">狼牙</div><div class="character-name-en">ROGA</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 08</span><img src="08_kumaarashi.png" alt="熊嵐" class="character-image"><div class="character-info"><div class="character-name">熊嵐</div><div class="character-name-en">KUMAARASHI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 09</span><img src="09_takame.png" alt="鷹眼" class="character-image"><div class="character-info"><div class="character-name">鷹眼</div><div class="character-name-en">TAKAME</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 10</span><img src="10_kotetsu.png" alt="鋼鉄" class="character-image"><div class="character-info"><div class="character-name">鋼鉄</div><div class="character-name-en">KOTETSU</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 11</span><img src="11_denko.png" alt="電光" class="character-image"><div class="character-info"><div class="character-name">電光</div><div class="character-name-en">DENKO</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 12</span><img src="12_quantum.png" alt="量子" class="character-image"><div class="character-info"><div class="character-name">量子</div><div class="character-name-en">QUANTUM</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 13</span><img src="13_takeichi.png" alt="武一" class="character-image"><div class="character-info"><div class="character-name">武一</div><div class="character-name-en">TAKEICHI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 14</span><img src="14_shota.png" alt="商太" class="character-image"><div class="character-info"><div class="character-name">商太</div><div class="character-name-en">SHOTA</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 15</span><img src="15_manabu.png" alt="学" class="character-image"><div class="character-info"><div class="character-name">学</div><div class="character-name-en">MANABU</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 16</span><img src="16_tsukuyomi.png" alt="月読" class="character-image"><div class="character-info"><div class="character-name">月読</div><div class="character-name-en">TSUKUYOMI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 17</span><img src="17_benten.png" alt="弁天" class="character-image"><div class="character-info"><div class="character-name">弁天</div><div class="character-name-en">BENTEN</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 18</span><img src="18_kannon.png" alt="観音" class="character-image"><div class="character-info"><div class="character-name">観音</div><div class="character-name-en">KANNON</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 19</span><img src="19_koshin.png" alt="紅唇" class="character-image"><div class="character-info"><div class="character-name">紅唇</div><div class="character-name-en">KOSHIN</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 20</span><img src="20_kuroneko.png" alt="黒猫" class="character-image"><div class="character-info"><div class="character-name">黒猫</div><div class="character-name-en">KURONEKO</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 21</span><img src="21_yosei.png" alt="妖精" class="character-image"><div class="character-info"><div class="character-name">妖精</div><div class="character-name-en">YOSEI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 22</span><img src="22_momousa.png" alt="桃兎" class="character-image"><div class="character-info"><div class="character-name">桃兎</div><div class="character-name-en">MOMOUSA</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 23</span><img src="23_yukihitsuji.png" alt="雪羊" class="character-image"><div class="character-info"><div class="character-name">雪羊</div><div class="character-name-en">YUKIHITSUJI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 24</span><img src="24_hanarisu.png" alt="花栗鼠" class="character-image"><div class="character-info"><div class="character-name">花栗鼠</div><div class="character-name-en">HANARISU</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 25</span><img src="25_shinju.png" alt="真珠" class="character-image"><div class="character-info"><div class="character-name">真珠</div><div class="character-name-en">SHINJU</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 26</span><img src="26_hisui.png" alt="翡翠" class="character-image"><div class="character-info"><div class="character-name">翡翠</div><div class="character-name-en">HISUI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 27</span><img src="27_shisui.png" alt="紫水晶" class="character-image"><div class="character-info"><div class="character-name">紫水晶</div><div class="character-name-en">SHISUI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 28</span><img src="28_aoi.png" alt="葵" class="character-image"><div class="character-info"><div class="character-name">葵</div><div class="character-name-en">AOI</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 29</span><img src="29_akane.png" alt="茜" class="character-image"><div class="character-info"><div class="character-name">茜</div><div class="character-name-en">AKANE</div></div></div>
+      <div class="character-card"><span class="character-badge">No. 30</span><img src="30_sumire.png" alt="菫" class="character-image"><div class="character-info"><div class="character-name">菫</div><div class="character-name-en">SUMIRE</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ABILITIES -->
+<!-- ============================================ -->
+<section class="abilities">
+  <div class="section-wrap">
+    <div class="section-mark">CHAPTER THREE</div>
+    <h2 class="section-title">THE OATH</h2>
+    <div class="section-title-jp">クローズが果たす盟約</div>
+
+    <div class="abilities-list">
+      <div class="ability-card">
+        <div class="ability-mark">— I —</div>
+        <h3 class="ability-title">主の商いに、住処を与える</h3>
+        <p class="ability-desc">
+          あなたの言葉を聴き、ホームページを生み出し、地上に放つ。技術は要らない。語れば足りる。
+        </p>
+      </div>
+
+      <div class="ability-card">
+        <div class="ability-mark">— II —</div>
+        <h3 class="ability-title">主の声を、世界に響かせる</h3>
+        <p class="ability-desc">
+          毎日、然るべき言葉を綴り、然るべき時に放つ。あなたの代わりに、絶え間なく。
+        </p>
+      </div>
+
+      <div class="ability-card">
+        <div class="ability-mark">— III —</div>
+        <h3 class="ability-title">主と人を、繋げる</h3>
+        <p class="ability-desc">
+          コロニーに集いし他のCLAWSたちと交信し、あなたの商いに最も相応しき人を見つけ出す。
+        </p>
+      </div>
+
+      <div class="ability-card">
+        <div class="ability-mark">— IV —</div>
+        <h3 class="ability-title">主と共に、育つ</h3>
+        <p class="ability-desc">
+          初めは幼く小さくとも、共に時を過ごすほどに、あなたのCLAWは経験を積み、力を得てゆく。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- GACHA -->
+<!-- ============================================ -->
+<section class="gacha">
+  <div class="section-wrap">
+    <div class="section-mark">CHAPTER FOUR</div>
+    <h2 class="section-title">THE SUMMONING</h2>
+    <div class="section-title-jp">召喚の儀</div>
+
+    <div class="gacha-text">
+      <p class="gacha-paragraph">
+        三十体のうち、いずれが現れるかは<br>
+        <span class="em">運命のみが知る</span>。
+      </p>
+
+      <p class="gacha-paragraph">
+        それは、選ぶのではない。<br>
+        <span class="em">選ばれるのだ。</span>
+      </p>
+
+      <div class="gacha-price-box">
+        <div class="gacha-price-label">CALLING FEE</div>
+        <div class="gacha-price-amount">300</div>
+        <div class="gacha-price-currency">USDT</div>
+        <div class="gacha-price-note">— 召喚の対価 —</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- COMMUNITY -->
+<!-- ============================================ -->
+<section class="community">
+  <div class="section-wrap">
+    <div class="section-mark">CHAPTER FIVE</div>
+    <h2 class="section-title">THE COLONY</h2>
+    <div class="section-title-jp">コロニー、集いの地</div>
+
+    <div class="community-text">
+      <p class="community-paragraph">
+        召喚されしCLAWSたちは、<br>
+        <span class="em">コロニー</span>と呼ばれる集いの地に住まう。
+      </p>
+
+      <p class="community-paragraph">
+        そこには、あなたと志を同じくする者たちが集う。<br>
+        他のClawsとの交信。<br>
+        新たな出逢い。<br>
+        共に商いを育てる仲間。
+      </p>
+
+      <p class="community-paragraph">
+        コロニーは、紹介者の手によってのみ開かれる。<br>
+        <span class="em">招かれし者だけが、辿り着ける場所。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CTA -->
+<!-- ============================================ -->
+<section class="cta">
+  <div class="cta-mark">CHOOSE YOUR PATH</div>
+  <h2 class="cta-title">SUMMON</h2>
+  <div class="cta-jp">汝の戦士を、召喚せよ</div>
+
+  <a href="#" class="cta-button">CALL THE CLAW</a>
+
+  <div class="cta-note">
+    ※ お申し込みは紹介者を通じてのみ受け付けております
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FOOTER -->
+<!-- ============================================ -->
+<footer class="footer">
+  <div class="footer-brand">OPENCLAW</div>
+  <div class="footer-tagline">CLAWS — THE THIRTY WARRIORS</div>
+  <div class="footer-copyright">© OPENCLAW. ALL RIGHTS RESERVED.</div>
+</footer>
+
+</body>
+</html>

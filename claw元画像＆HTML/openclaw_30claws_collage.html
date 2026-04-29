@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw - 30 Claws Collection</title>
+<style>
+  /* ========================================
+     OpenClaw 30 Claws Collection
+     使い方：このHTMLと同じフォルダに30体のpng画像を入れて開くだけ
+     ファイル名は仁さんの納品ファイル名のまま使えます
+     ======================================== */
+
+  :root {
+    --color-bg-deep: #0a0000;
+    --color-bg-mid: #1a0505;
+    --color-accent-red: #d10202;
+    --color-accent-bright: #ff1f1f;
+    --color-gold: #d4af37;
+    --color-text: #f5e8d8;
+    --color-text-dim: #a89c8b;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+JP:wght@300;700;900&family=Bebas+Neue&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: 
+      radial-gradient(ellipse at top, var(--color-bg-mid) 0%, var(--color-bg-deep) 50%),
+      var(--color-bg-deep);
+    color: var(--color-text);
+    font-family: 'Noto Serif JP', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* 背景の和風パターン */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(209, 2, 2, 0.02) 40px,
+        rgba(209, 2, 2, 0.02) 41px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ヘッダーセクション */
+  .header {
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-mark {
+    display: inline-block;
+    color: var(--color-accent-red);
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .header-mark::before,
+  .header-mark::after {
+    content: '◆';
+    margin: 0 15px;
+    color: var(--color-gold);
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    background: linear-gradient(180deg, var(--color-text) 0%, var(--color-accent-red) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 0 0 60px rgba(209, 2, 2, 0.3);
+  }
+
+  .header-subtitle {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(18px, 2vw, 28px);
+    color: var(--color-text-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 30px;
+  }
+
+  .header-count {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 1px solid var(--color-gold);
+    border-radius: 0;
+    color: var(--color-gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.3em;
+    position: relative;
+  }
+
+  .header-count::before,
+  .header-count::after {
+    content: '';
+    position: absolute;
+    width: 8px; height: 8px;
+    border: 1px solid var(--color-gold);
+  }
+  .header-count::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+  .header-count::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+  /* セクション見出し */
+  .section-divider {
+    text-align: center;
+    margin: 60px 0 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-title {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-accent-red);
+    letter-spacing: 0.4em;
+    padding: 0 40px;
+    position: relative;
+  }
+
+  .section-title-jp {
+    display: block;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    color: var(--color-gold);
+    letter-spacing: 0.5em;
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent-red), transparent);
+  }
+  .section-divider::before { left: 5%; }
+  .section-divider::after { right: 5%; }
+
+  /* キャラグリッド */
+  .character-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .character-card {
+    position: relative;
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, rgba(209, 2, 2, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border: 1px solid rgba(209, 2, 2, 0.3);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+  }
+
+  .character-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+
+  .character-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--color-accent-bright), var(--color-gold)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .character-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.6),
+      0 0 30px rgba(209, 2, 2, 0.4);
+    z-index: 10;
+  }
+
+  .character-card:hover::after {
+    opacity: 1;
+  }
+
+  .character-card:hover::before {
+    opacity: 0.3;
+  }
+
+  .character-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: radial-gradient(circle at center, rgba(40, 0, 0, 0.4) 0%, transparent 70%);
+    transition: transform 0.6s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .character-card:hover .character-image {
+    transform: scale(1.08);
+  }
+
+  .character-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+    padding: 30px 12px 12px;
+    z-index: 4;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .character-card:hover .character-info {
+    transform: translateY(0);
+  }
+
+  .character-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    color: var(--color-gold);
+    letter-spacing: 0.3em;
+  }
+
+  .character-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin: 4px 0;
+  }
+
+  .character-name-en {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--color-accent-bright);
+    letter-spacing: 0.15em;
+  }
+
+  /* 番号バッジ（常時表示） */
+  .character-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--color-accent-red);
+    padding: 4px 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    color: var(--color-gold);
+    letter-spacing: 0.15em;
+    z-index: 5;
+  }
+
+  /* タイプラベル（タイプごとの色分け） */
+  .character-type-label {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(209, 2, 2, 0.9);
+    color: white;
+    padding: 3px 8px;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 10px;
+    font-weight: 700;
+    z-index: 5;
+    letter-spacing: 0.1em;
+  }
+
+  /* タイプ別カラー */
+  .type-demon { background: rgba(209, 2, 2, 0.9); }
+  .type-god { background: rgba(212, 175, 55, 0.9); color: #1a0505; }
+  .type-wild { background: rgba(101, 67, 33, 0.9); }
+  .type-robot { background: rgba(80, 80, 100, 0.9); }
+  .type-human { background: rgba(50, 50, 100, 0.9); }
+  .type-goddess { background: rgba(255, 215, 0, 0.9); color: #1a0505; }
+  .type-koakuma { background: rgba(255, 0, 100, 0.9); }
+  .type-fluffy { background: rgba(255, 182, 193, 0.9); color: #1a0505; }
+  .type-concierge { background: rgba(150, 200, 180, 0.9); color: #1a0505; }
+  .type-friend { background: rgba(150, 150, 220, 0.9); }
+
+  /* フッター */
+  .footer {
+    text-align: center;
+    padding: 80px 20px 60px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(209, 2, 2, 0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--color-text-dim);
+    letter-spacing: 0.4em;
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--color-accent-red);
+    letter-spacing: 0.3em;
+    margin-top: 10px;
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 1200px) {
+    .character-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 800px) {
+    .character-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 15px; }
+    .character-card .character-info { padding: 15px 8px 8px; }
+    .character-name { font-size: 14px; }
+  }
+  @media (max-width: 500px) {
+    .character-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ローディング演出（スクロール時に各カードがフェードイン） */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .character-card {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  /* 個別の遅延アニメーション */
+  .character-grid .character-card:nth-child(1) { animation-delay: 0.05s; }
+  .character-grid .character-card:nth-child(2) { animation-delay: 0.10s; }
+  .character-grid .character-card:nth-child(3) { animation-delay: 0.15s; }
+  .character-grid .character-card:nth-child(4) { animation-delay: 0.20s; }
+  .character-grid .character-card:nth-child(5) { animation-delay: 0.25s; }
+  .character-grid .character-card:nth-child(6) { animation-delay: 0.30s; }
+  .character-grid .character-card:nth-child(7) { animation-delay: 0.35s; }
+  .character-grid .character-card:nth-child(8) { animation-delay: 0.40s; }
+  .character-grid .character-card:nth-child(9) { animation-delay: 0.45s; }
+  .character-grid .character-card:nth-child(10) { animation-delay: 0.50s; }
+  .character-grid .character-card:nth-child(11) { animation-delay: 0.55s; }
+  .character-grid .character-card:nth-child(12) { animation-delay: 0.60s; }
+  .character-grid .character-card:nth-child(13) { animation-delay: 0.65s; }
+  .character-grid .character-card:nth-child(14) { animation-delay: 0.70s; }
+  .character-grid .character-card:nth-child(15) { animation-delay: 0.75s; }
+
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-mark">OPENCLAW PRESENTS</div>
+  <h1 class="header-title">CLAWS</h1>
+  <p class="header-subtitle">クローズの一族 全三十体</p>
+  <div class="header-count">30 WARRIORS</div>
+</header>
+
+<!-- 男系セクション -->
+<div class="section-divider">
+  <h2 class="section-title">
+    MALE
+    <span class="section-title-jp">男系十五体</span>
+  </h2>
+</div>
+
+<div class="character-grid">
+  <!-- 01. 紅蓮 -->
+  <div class="character-card">
+    <span class="character-badge">No. 01</span>
+    <span class="character-type-label type-demon">悪魔</span>
+    <img src="openclaw_demon_01.png" alt="紅蓮" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 01</div>
+      <div class="character-name">紅蓮</div>
+      <div class="character-name-en">GUREN</div>
+    </div>
+  </div>
+
+  <!-- 02. 氷晶 -->
+  <div class="character-card">
+    <span class="character-badge">No. 02</span>
+    <span class="character-type-label type-demon">悪魔</span>
+    <img src="02_hyosho.png" alt="氷晶" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 02</div>
+      <div class="character-name">氷晶</div>
+      <div class="character-name-en">HYOSHO</div>
+    </div>
+  </div>
+
+  <!-- 03. 闇影 -->
+  <div class="character-card">
+    <span class="character-badge">No. 03</span>
+    <span class="character-type-label type-demon">悪魔</span>
+    <img src="03_yamikage.png" alt="闇影" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 03</div>
+      <div class="character-name">闇影</div>
+      <div class="character-name-en">YAMIKAGE</div>
+    </div>
+  </div>
+
+  <!-- 04. 雷神 -->
+  <div class="character-card">
+    <span class="character-badge">No. 04</span>
+    <span class="character-type-label type-god">神様</span>
+    <img src="04_raijin.png" alt="雷神" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 04</div>
+      <div class="character-name">雷神</div>
+      <div class="character-name-en">RAIJIN</div>
+    </div>
+  </div>
+
+  <!-- 05. 風神 -->
+  <div class="character-card">
+    <span class="character-badge">No. 05</span>
+    <span class="character-type-label type-god">神様</span>
+    <img src="05_fujin.png" alt="風神" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 05</div>
+      <div class="character-name">風神</div>
+      <div class="character-name-en">FUJIN</div>
+    </div>
+  </div>
+
+  <!-- 06. 大黒天 -->
+  <div class="character-card">
+    <span class="character-badge">No. 06</span>
+    <span class="character-type-label type-god">神様</span>
+    <img src="06_daikoku.png" alt="大黒天" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 06</div>
+      <div class="character-name">大黒天</div>
+      <div class="character-name-en">DAIKOKU</div>
+    </div>
+  </div>
+
+  <!-- 07. 狼牙 -->
+  <div class="character-card">
+    <span class="character-badge">No. 07</span>
+    <span class="character-type-label type-wild">野生</span>
+    <img src="07_roga.png" alt="狼牙" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 07</div>
+      <div class="character-name">狼牙</div>
+      <div class="character-name-en">ROGA</div>
+    </div>
+  </div>
+
+  <!-- 08. 熊嵐 -->
+  <div class="character-card">
+    <span class="character-badge">No. 08</span>
+    <span class="character-type-label type-wild">野生</span>
+    <img src="08_kumaarashi.png" alt="熊嵐" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 08</div>
+      <div class="character-name">熊嵐</div>
+      <div class="character-name-en">KUMAARASHI</div>
+    </div>
+  </div>
+
+  <!-- 09. 鷹眼 -->
+  <div class="character-card">
+    <span class="character-badge">No. 09</span>
+    <span class="character-type-label type-wild">野生</span>
+    <img src="09_takame.png" alt="鷹眼" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 09</div>
+      <div class="character-name">鷹眼</div>
+      <div class="character-name-en">TAKAME</div>
+    </div>
+  </div>
+
+  <!-- 10. 鋼鉄 -->
+  <div class="character-card">
+    <span class="character-badge">No. 10</span>
+    <span class="character-type-label type-robot">機械</span>
+    <img src="10_kotetsu.png" alt="鋼鉄" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 10</div>
+      <div class="character-name">鋼鉄</div>
+      <div class="character-name-en">KOTETSU</div>
+    </div>
+  </div>
+
+  <!-- 11. 電光 -->
+  <div class="character-card">
+    <span class="character-badge">No. 11</span>
+    <span class="character-type-label type-robot">機械</span>
+    <img src="11_denko.png" alt="電光" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 11</div>
+      <div class="character-name">電光</div>
+      <div class="character-name-en">DENKO</div>
+    </div>
+  </div>
+
+  <!-- 12. 量子 -->
+  <div class="character-card">
+    <span class="character-badge">No. 12</span>
+    <span class="character-type-label type-robot">機械</span>
+    <img src="12_quantum.png" alt="量子" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 12</div>
+      <div class="character-name">量子</div>
+      <div class="character-name-en">QUANTUM</div>
+    </div>
+  </div>
+
+  <!-- 13. 武一 -->
+  <div class="character-card">
+    <span class="character-badge">No. 13</span>
+    <span class="character-type-label type-human">人間</span>
+    <img src="13_takeichi.png" alt="武一" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 13</div>
+      <div class="character-name">武一</div>
+      <div class="character-name-en">TAKEICHI</div>
+    </div>
+  </div>
+
+  <!-- 14. 商太 -->
+  <div class="character-card">
+    <span class="character-badge">No. 14</span>
+    <span class="character-type-label type-human">人間</span>
+    <img src="14_shota.png" alt="商太" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 14</div>
+      <div class="character-name">商太</div>
+      <div class="character-name-en">SHOTA</div>
+    </div>
+  </div>
+
+  <!-- 15. 学 -->
+  <div class="character-card">
+    <span class="character-badge">No. 15</span>
+    <span class="character-type-label type-human">人間</span>
+    <img src="15_manabu.png" alt="学" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 15</div>
+      <div class="character-name">学</div>
+      <div class="character-name-en">MANABU</div>
+    </div>
+  </div>
+</div>
+
+<!-- 女系セクション -->
+<div class="section-divider">
+  <h2 class="section-title">
+    FEMALE
+    <span class="section-title-jp">女系十五体</span>
+  </h2>
+</div>
+
+<div class="character-grid">
+  <!-- 16. 月読 -->
+  <div class="character-card">
+    <span class="character-badge">No. 16</span>
+    <span class="character-type-label type-goddess">女神</span>
+    <img src="16_tsukuyomi.png" alt="月読" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 16</div>
+      <div class="character-name">月読</div>
+      <div class="character-name-en">TSUKUYOMI</div>
+    </div>
+  </div>
+
+  <!-- 17. 弁天 -->
+  <div class="character-card">
+    <span class="character-badge">No. 17</span>
+    <span class="character-type-label type-goddess">女神</span>
+    <img src="17_benten.png" alt="弁天" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 17</div>
+      <div class="character-name">弁天</div>
+      <div class="character-name-en">BENTEN</div>
+    </div>
+  </div>
+
+  <!-- 18. 観音 -->
+  <div class="character-card">
+    <span class="character-badge">No. 18</span>
+    <span class="character-type-label type-goddess">女神</span>
+    <img src="18_kannon.png" alt="観音" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 18</div>
+      <div class="character-name">観音</div>
+      <div class="character-name-en">KANNON</div>
+    </div>
+  </div>
+
+  <!-- 19. 紅唇 -->
+  <div class="character-card">
+    <span class="character-badge">No. 19</span>
+    <span class="character-type-label type-koakuma">小悪魔</span>
+    <img src="19_koshin.png" alt="紅唇" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 19</div>
+      <div class="character-name">紅唇</div>
+      <div class="character-name-en">KOSHIN</div>
+    </div>
+  </div>
+
+  <!-- 20. 黒猫 -->
+  <div class="character-card">
+    <span class="character-badge">No. 20</span>
+    <span class="character-type-label type-koakuma">小悪魔</span>
+    <img src="20_kuroneko.png" alt="黒猫" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 20</div>
+      <div class="character-name">黒猫</div>
+      <div class="character-name-en">KURONEKO</div>
+    </div>
+  </div>
+
+  <!-- 21. 妖精 -->
+  <div class="character-card">
+    <span class="character-badge">No. 21</span>
+    <span class="character-type-label type-koakuma">小悪魔</span>
+    <img src="21_yosei.png" alt="妖精" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 21</div>
+      <div class="character-name">妖精</div>
+      <div class="character-name-en">YOSEI</div>
+    </div>
+  </div>
+
+  <!-- 22. 桃兎 -->
+  <div class="character-card">
+    <span class="character-badge">No. 22</span>
+    <span class="character-type-label type-fluffy">癒し</span>
+    <img src="22_momousa.png" alt="桃兎" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 22</div>
+      <div class="character-name">桃兎</div>
+      <div class="character-name-en">MOMOUSA</div>
+    </div>
+  </div>
+
+  <!-- 23. 雪羊 -->
+  <div class="character-card">
+    <span class="character-badge">No. 23</span>
+    <span class="character-type-label type-fluffy">癒し</span>
+    <img src="23_yukihitsuji.png" alt="雪羊" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 23</div>
+      <div class="character-name">雪羊</div>
+      <div class="character-name-en">YUKIHITSUJI</div>
+    </div>
+  </div>
+
+  <!-- 24. 花栗鼠 -->
+  <div class="character-card">
+    <span class="character-badge">No. 24</span>
+    <span class="character-type-label type-fluffy">癒し</span>
+    <img src="24_hanarisu.png" alt="花栗鼠" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 24</div>
+      <div class="character-name">花栗鼠</div>
+      <div class="character-name-en">HANARISU</div>
+    </div>
+  </div>
+
+  <!-- 25. 真珠 -->
+  <div class="character-card">
+    <span class="character-badge">No. 25</span>
+    <span class="character-type-label type-concierge">秘書</span>
+    <img src="25_shinju.png" alt="真珠" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 25</div>
+      <div class="character-name">真珠</div>
+      <div class="character-name-en">SHINJU</div>
+    </div>
+  </div>
+
+  <!-- 26. 翡翠 -->
+  <div class="character-card">
+    <span class="character-badge">No. 26</span>
+    <span class="character-type-label type-concierge">秘書</span>
+    <img src="26_hisui.png" alt="翡翠" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 26</div>
+      <div class="character-name">翡翠</div>
+      <div class="character-name-en">HISUI</div>
+    </div>
+  </div>
+
+  <!-- 27. 紫水晶 -->
+  <div class="character-card">
+    <span class="character-badge">No. 27</span>
+    <span class="character-type-label type-concierge">秘書</span>
+    <img src="27_shisui.png" alt="紫水晶" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 27</div>
+      <div class="character-name">紫水晶</div>
+      <div class="character-name-en">SHISUI</div>
+    </div>
+  </div>
+
+  <!-- 28. 葵 -->
+  <div class="character-card">
+    <span class="character-badge">No. 28</span>
+    <span class="character-type-label type-friend">友人</span>
+    <img src="28_aoi.png" alt="葵" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 28</div>
+      <div class="character-name">葵</div>
+      <div class="character-name-en">AOI</div>
+    </div>
+  </div>
+
+  <!-- 29. 茜 -->
+  <div class="character-card">
+    <span class="character-badge">No. 29</span>
+    <span class="character-type-label type-friend">友人</span>
+    <img src="29_akane.png" alt="茜" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 29</div>
+      <div class="character-name">茜</div>
+      <div class="character-name-en">AKANE</div>
+    </div>
+  </div>
+
+  <!-- 30. 菫 -->
+  <div class="character-card">
+    <span class="character-badge">No. 30</span>
+    <span class="character-type-label type-friend">友人</span>
+    <img src="30_sumire.png" alt="菫" class="character-image">
+    <div class="character-info">
+      <div class="character-number">No. 30</div>
+      <div class="character-name">菫</div>
+      <div class="character-name-en">SUMIRE</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-text">CHOOSE YOUR CLAW</div>
+  <div class="footer-brand">OPENCLAW</div>
+</footer>
+
+</body>
+</html>

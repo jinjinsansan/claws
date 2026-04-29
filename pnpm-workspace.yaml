@@ -1,0 +1,13 @@
+packages:
+  - 'apps/web'
+  - 'packages/characters'
+  # 後続 Phase で追加:
+  # - 'apps/bot'                       # Phase 4: Telegram Bot
+  # - 'apps/workers/hp-generator'      # Phase 5: HP生成
+  # - 'apps/workers/reward-calculator' # Phase 6: 紹介報酬
+  # - 'apps/workers/push-notification' # Phase 7: 通知
+  # - 'apps/workers/nft-sync'          # Phase 3-6 で
+  # - 'apps/workers/sns-poster'        # MVP2
+  # - 'apps/workers/backup'            # 運用フェーズ
+  # - 'packages/shared'                # 横断的型・定数（必要時）
+  # - 'packages/db'                    # Supabase クライアント・型（必要時）
