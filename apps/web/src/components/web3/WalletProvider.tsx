@@ -1,40 +1,27 @@
 "use client";
 
 /**
- * WalletProvider - wagmi v2 + viem 接続プロバイダ
+ * WalletProvider - 現状はプレースホルダー (Phase 2-6)
  *
- * SPEC-07 §5.3 準拠。Polygon Mainnet 用の wagmi config を提供。
- * Phase 2 では UI 表示のみ。実購入トランザクションは Phase 3 で接続。
+ * SPEC-07 §5.3 の本格実装は **Phase 3 (NFT 購入フロー実装時)** に移管。
  *
- * 接続方式:
- *   - injected (MetaMask, Brave Wallet 等の注入型ウォレット)
- *   - WalletConnect は Phase 3 で追加 (Project ID 取得後)
+ * 移管理由:
+ *   - wagmi v2 + viem は Phase 3 のスマコン購入時にこそ核となる
+ *   - Phase 2 単体での wagmi 統合は walletConnect バレル resolve 問題で
+ *     Next.js webpack ビルドが不安定 (porto/viem 等の peer dep 解決失敗)
+ *   - Phase 3 で Foundry スマコンをデプロイする際に wagmi も一気に組み込む
+ *     方が、最低限の動作確認 (mintClaw → ABI 連携) を含めて検証できる
+ *
+ * Phase 3 で復元する内容:
+ *   - wagmi createConfig (Polygon mainnet)
+ *   - injected コネクタ + Phase 3 で必要なら walletConnect / coinbase
+ *   - QueryClientProvider
+ *   - 購入フロー (apps/web/src/app/apply/page.tsx 等で usePurchase 等)
+ *
+ * 現状はパススルーのみ。children をそのまま返す。
  */
-import { useState, type ReactNode } from "react";
-import { WagmiProvider, createConfig, http } from "wagmi";
-import { polygon } from "wagmi/chains";
-import { injected } from "wagmi/connectors";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// wagmi config (singleton)
-const config = createConfig({
-  chains: [polygon],
-  connectors: [injected()],
-  transports: {
-    [polygon.id]: http(
-      process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-rpc.com",
-    ),
-  },
-  ssr: true,
-});
+import type { ReactNode } from "react";
 
 export function WalletProvider({ children }: { children: ReactNode }) {
-  // QueryClient はコンポーネントマウント時に1度だけ生成 (SSR 安全)
-  const [queryClient] = useState(() => new QueryClient());
-
-  return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
-  );
+  return <>{children}</>;
 }
