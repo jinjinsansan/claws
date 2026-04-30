@@ -91,6 +91,7 @@ lerna-debug.log*
 *.swo
 .zed/
 .cursor/
+.claude/
 
 # -------- OS --------
 .DS_Store

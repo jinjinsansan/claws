@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Noto_Serif_JP, Cinzel, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import { WalletProvider } from "@/components/web3/WalletProvider";
 
 const notoSans = Noto_Sans_JP({
   subsets: ["latin"],
@@ -60,7 +61,9 @@ export default function RootLayout({
       lang="ja"
       className={`${notoSans.variable} ${notoSerif.variable} ${cinzel.variable} ${bebas.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <WalletProvider>{children}</WalletProvider>
+      </body>
     </html>
   );
 }

@@ -10,6 +10,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import charactersIndex from "@openclaw/characters/data/index.json";
+import { ConnectWalletButton } from "@/components/web3/ConnectWalletButton";
 import "../openclaw-lp.css";
 
 export const metadata = {
@@ -33,7 +34,12 @@ const CATEGORY_JP: Record<string, string> = {
 
 export default function ClawsCatalogPage() {
   return (
-    <main className="min-h-screen bg-bg-deep">
+    <main className="min-h-screen bg-bg-deep relative">
+      {/* ============ TOP BAR (wallet) ============ */}
+      <div className="absolute top-0 right-0 p-4 md:p-6 z-20">
+        <ConnectWalletButton />
+      </div>
+
       {/* ============ HEADER ============ */}
       <section className="border-b border-border-faint">
         <div className="lp-section-wrap !pt-32 !pb-20">
