@@ -3,23 +3,73 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #0a0a0f;
-  --color-surface: #12121e;
-  --color-primary: #c9a84c;
-  --color-primary-light: #e8c96a;
-  --color-text: #f0f0f0;
-  --color-text-muted: #8888aa;
-  --color-border: #2a2a3e;
+  /* OPENCLAW Platform 重厚・荘厳系配色（SPEC-00 §8.1） */
+  --bg-deep: #080202;
+  --bg-mid: #1a0808;
+  --bg-card: rgba(20, 5, 5, 0.6);
+  --red-blood: #8b0000;
+  --red-bright: #d10202;
+  --red-flame: #ff1f1f;
+  --gold: #c9a961;
+  --gold-bright: #e8c878;
+  --text-main: #f0e6d6;
+  --text-dim: #a89c8b;
+  --text-mute: #6b5d50;
+  --border-faint: rgba(201, 169, 97, 0.2);
 }
 
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
 body {
-  color: var(--color-text);
-  background: var(--color-bg);
-  font-family: var(--font-noto-sans), "Noto Sans JP", sans-serif;
+  color: var(--text-main);
+  background: var(--bg-deep);
+  font-family: var(--font-noto-serif), "Noto Serif JP", serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* グローバルパターン - 装飾用斜線 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201, 169, 97, 0.015) 60px, rgba(201, 169, 97, 0.015) 61px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ノイズテクスチャ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4' /%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
+}
+
+/* 全 section を装飾レイヤーより前面に */
+section {
+  position: relative;
+  z-index: 5;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* OPENCLAW 装飾用ユーティリティ */
+  .font-cinzel {
+    font-family: var(--font-cinzel), 'Cinzel', serif;
+  }
+  .font-bebas {
+    font-family: var(--font-bebas), 'Bebas Neue', sans-serif;
   }
 }

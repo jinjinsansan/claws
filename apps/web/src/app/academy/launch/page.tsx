@@ -31,7 +31,7 @@ export default function LaunchPage() {
 
           <div className="grid sm:grid-cols-2 gap-6">
             {episodes.map((ep) => (
-              <Link key={ep.number} href={`/launch/episode/${ep.number}`}>
+              <Link key={ep.number} href={`/academy/launch/episode/${ep.number}`}>
                 <Card className="hover:border-primary/50 transition-colors cursor-pointer h-full relative">
                   {watched.includes(ep.number) && (
                     <span className="absolute top-3 right-3 bg-primary text-bg text-xs font-bold px-2 py-1 rounded-full">

@@ -58,7 +58,7 @@ export default function EpisodePage({ params }: { params: { n: string } }) {
               <p className="text-text-muted text-sm sm:text-base mb-4 sm:mb-6">
                 AI Builders Labで、作れる側の人間になりましょう。
               </p>
-              <Button href="/apply" className="text-base sm:text-lg py-3 px-8 sm:px-10">
+              <Button href="/academy/apply" className="text-base sm:text-lg py-3 px-8 sm:px-10">
                 今すぐ申し込む
               </Button>
             </div>
@@ -71,7 +71,7 @@ export default function EpisodePage({ params }: { params: { n: string } }) {
           <div className="flex justify-between items-center pt-8 mt-8 border-t border-border">
             {prevEp ? (
               <Link
-                href={`/launch/episode/${prevEp}`}
+                href={`/academy/launch/episode/${prevEp}`}
                 className="text-text-muted hover:text-primary transition-colors"
               >
                 ← 第{prevEp}話
@@ -80,14 +80,14 @@ export default function EpisodePage({ params }: { params: { n: string } }) {
               <span />
             )}
             <Link
-              href="/launch"
+              href="/academy/launch"
               className="text-text-muted hover:text-primary transition-colors text-sm"
             >
               一覧に戻る
             </Link>
             {nextEp ? (
               <Link
-                href={`/launch/episode/${nextEp}`}
+                href={`/academy/launch/episode/${nextEp}`}
                 className="text-text-muted hover:text-primary transition-colors"
               >
                 第{nextEp}話 →

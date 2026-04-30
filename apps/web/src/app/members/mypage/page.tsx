@@ -165,7 +165,7 @@ export default function MyPagePage() {
           {getPlanLabel(profile.plan)}
         </p>
         {profile.plan && profile.plan !== "zoom" && (
-          <Button href="/apply" variant="outline" className="text-sm py-2 px-6">
+          <Button href="/academy/apply" variant="outline" className="text-sm py-2 px-6">
             プランをアップグレード
           </Button>
         )}

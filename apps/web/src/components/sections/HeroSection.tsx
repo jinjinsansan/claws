@@ -45,7 +45,7 @@ export default function HeroSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <Button href="/launch/episode/1" className="text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-12">
+          <Button href="/academy/launch/episode/1" className="text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-12">
             無料ローンチ動画を見る
           </Button>
           <Button href="/#pricing" variant="outline" className="text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-12">

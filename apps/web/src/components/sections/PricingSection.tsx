@@ -85,7 +85,7 @@ export default function PricingSection() {
                 ))}
               </ul>
               <Button
-                href="/apply"
+                href="/academy/apply"
                 variant={plan.highlight ? "primary" : "outline"}
                 className="w-full text-center"
               >

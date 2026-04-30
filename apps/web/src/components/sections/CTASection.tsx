@@ -84,12 +84,12 @@ export default function CTASection() {
         )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {isOpen && (
-            <Button href="/apply" className="text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-12">
+            <Button href="/academy/apply" className="text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-12">
               今すぐ申し込む
             </Button>
           )}
           <Button
-            href="/launch/episode/1"
+            href="/academy/launch/episode/1"
             variant="outline"
             className="text-base sm:text-lg py-3 sm:py-4 px-8 sm:px-12"
           >

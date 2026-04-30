@@ -18,12 +18,12 @@ export default function Footer() {
             <h4 className="font-bold text-text-main mb-4 text-sm">リンク</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/launch/episode/1" className="text-text-muted hover:text-primary transition-colors">
+                <Link href="/academy/launch/episode/1" className="text-text-muted hover:text-primary transition-colors">
                   無料ローンチ動画
                 </Link>
               </li>
               <li>
-                <Link href="/apply" className="text-text-muted hover:text-primary transition-colors">
+                <Link href="/academy/apply" className="text-text-muted hover:text-primary transition-colors">
                   お申し込み
                 </Link>
               </li>

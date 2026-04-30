@@ -27,7 +27,7 @@ export default function Header() {
           <Link href="/login" className="text-text-muted hover:text-text-main transition-colors text-sm">
             ログイン
           </Link>
-          <Button href="/launch/episode/1" className="text-sm py-2 px-5">
+          <Button href="/academy/launch/episode/1" className="text-sm py-2 px-5">
             無料動画を見る
           </Button>
         </nav>
@@ -53,7 +53,7 @@ export default function Header() {
           <Link href="/#pricing" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>料金プラン</Link>
           <Link href="/#faq" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>FAQ</Link>
           <Link href="/login" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>ログイン</Link>
-          <Button href="/launch/episode/1" className="w-full text-center text-sm py-2">
+          <Button href="/academy/launch/episode/1" className="w-full text-center text-sm py-2">
             無料動画を見る
           </Button>
         </nav>
