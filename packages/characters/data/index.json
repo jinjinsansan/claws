@@ -3,210 +3,450 @@
     "claw_no": 1,
     "name_jp": "紅蓮",
     "name_en": "GUREN",
+    "name_romaji": "guren",
     "category": "demon",
+    "image_filename": "openclaw_demon_01.png",
+    "primary_color": "#d10202",
+    "tagline": [
+      "炎の如く、商いを灯せ。",
+      "地獄の業火より召喚されし、",
+      "OPENCLAW最初の戦士。"
+    ],
     "file": "01-guren.json"
   },
   {
     "claw_no": 2,
     "name_jp": "氷晶",
     "name_en": "HYOSHO",
+    "name_romaji": "hyosho",
     "category": "demon",
+    "image_filename": "02_hyosho.png",
+    "primary_color": "#5fb3d4",
+    "tagline": [
+      "氷の如く、戦略を冷徹に。",
+      "氷河の奥より召喚されし、",
+      "沈黙の戦術家。"
+    ],
     "file": "02-hyosho.json"
   },
   {
     "claw_no": 3,
     "name_jp": "闇影",
     "name_en": "YAMIKAGE",
+    "name_romaji": "yamikage",
     "category": "demon",
+    "image_filename": "03_yamikage.png",
+    "primary_color": "#7e3fb8",
+    "tagline": [
+      "闇の如く、密かに広めよ。",
+      "影の世界より召喚されし、",
+      "口コミの使者。"
+    ],
     "file": "03-yamikage.json"
   },
   {
     "claw_no": 4,
     "name_jp": "雷神",
     "name_en": "RAIJIN",
+    "name_romaji": "raijin",
     "category": "god",
+    "image_filename": "04_raijin.png",
+    "primary_color": "#d4af37",
+    "tagline": [
+      "雷の如く、勝負を決めよ。",
+      "天空の太鼓より召喚されし、",
+      "勝負を司る神。"
+    ],
     "file": "04-raijin.json"
   },
   {
     "claw_no": 5,
     "name_jp": "風神",
     "name_en": "FUJIN",
+    "name_romaji": "fujin",
     "category": "god",
+    "image_filename": "05_fujin.png",
+    "primary_color": "#3fb88e",
+    "tagline": [
+      "風の如く、時代を読め。",
+      "四季の風より召喚されし、",
+      "トレンドの先駆者。"
+    ],
     "file": "05-fujin.json"
   },
   {
     "claw_no": 6,
     "name_jp": "大黒天",
     "name_en": "DAIKOKU",
+    "name_romaji": "daikoku",
     "category": "god",
+    "image_filename": "06_daikoku.png",
+    "primary_color": "#d4972c",
+    "tagline": [
+      "富の如く、絶え間なく招き入れよ。",
+      "七福の宝より召喚されし、",
+      "財運を司る福の神。"
+    ],
     "file": "06-daikoku.json"
   },
   {
     "claw_no": 7,
     "name_jp": "狼牙",
     "name_en": "ROGA",
+    "name_romaji": "roga",
     "category": "wild",
+    "image_filename": "07_roga.png",
+    "primary_color": "#8a8a9a",
+    "tagline": [
+      "狼の如く、独りで切り拓け。",
+      "月夜の荒野より召喚されし、",
+      "孤高のニッチ戦士。"
+    ],
     "file": "07-roga.json"
   },
   {
     "claw_no": 8,
     "name_jp": "熊嵐",
     "name_en": "KUMAARASHI",
+    "name_romaji": "kumaarashi",
     "category": "wild",
+    "image_filename": "08_kumaarashi.png",
+    "primary_color": "#9c6b3a",
+    "tagline": [
+      "熊の如く、地に根を張れ。",
+      "山岳の麓より召喚されし、",
+      "地域を治める豪傑。"
+    ],
     "file": "08-kumaarashi.json"
   },
   {
     "claw_no": 9,
     "name_jp": "鷹眼",
     "name_en": "TAKAME",
+    "name_romaji": "takame",
     "category": "wild",
+    "image_filename": "09_takame.png",
+    "primary_color": "#a87838",
+    "tagline": [
+      "鷹の如く、全てを見渡せ。",
+      "天空の頂より召喚されし、",
+      "俯瞰の戦略家。"
+    ],
     "file": "09-takame.json"
   },
   {
     "claw_no": 10,
     "name_jp": "鋼鉄",
     "name_en": "KOTETSU",
+    "name_romaji": "kotetsu",
     "category": "robot",
+    "image_filename": "10_kotetsu.png",
+    "primary_color": "#9090a0",
+    "tagline": [
+      "鋼の如く、揺るがず動き続けよ。",
+      "古代工房より召喚されし、",
+      "不眠不休の自動化機関。"
+    ],
     "file": "10-kotetsu.json"
   },
   {
     "claw_no": 11,
     "name_jp": "電光",
     "name_en": "DENKO",
+    "name_romaji": "denko",
     "category": "robot",
+    "image_filename": "11_denko.png",
+    "primary_color": "#3aa0e0",
+    "tagline": [
+      "電光の如く、瞬時に駆け抜けよ。",
+      "電子の海より召喚されし、",
+      "最速の発信機関。"
+    ],
     "file": "11-denko.json"
   },
   {
     "claw_no": 12,
     "name_jp": "量子",
     "name_en": "QUANTUM",
+    "name_romaji": "quantum",
     "category": "robot",
+    "image_filename": "12_quantum.png",
+    "primary_color": "#a060d8",
+    "tagline": [
+      "量子の如く、未来を先取れ。",
+      "次元の狭間より召喚されし、",
+      "未来を視るAI戦士。"
+    ],
     "file": "12-quantum.json"
   },
   {
     "claw_no": 13,
     "name_jp": "武一",
     "name_en": "TAKEICHI",
+    "name_romaji": "takeichi",
     "category": "human",
+    "image_filename": "13_takeichi.png",
+    "primary_color": "#1a3a6a",
+    "tagline": [
+      "武士の如く、誠を貫け。",
+      "古き武家屋敷より召喚されし、",
+      "誠実なる継続の戦士。"
+    ],
     "file": "13-takeichi.json"
   },
   {
     "claw_no": 14,
     "name_jp": "商太",
     "name_en": "SHOTA",
+    "name_romaji": "shota",
     "category": "human",
+    "image_filename": "14_shota.png",
+    "primary_color": "#d8a020",
+    "tagline": [
+      "商人の如く、賑わいを生み出せ。",
+      "古き商人町より召喚されし、",
+      "人懐っこい交渉の達人。"
+    ],
     "file": "14-shota.json"
   },
   {
     "claw_no": 15,
     "name_jp": "学",
     "name_en": "MANABU",
+    "name_romaji": "manabu",
     "category": "human",
+    "image_filename": "15_manabu.png",
+    "primary_color": "#6a4828",
+    "tagline": [
+      "賢者の如く、教えで価値を生み出せ。",
+      "古書院より召喚されし、",
+      "知識を授ける学者の戦士。"
+    ],
     "file": "15-manabu.json"
   },
   {
     "claw_no": 16,
     "name_jp": "月読",
     "name_en": "TSUKUYOMI",
+    "name_romaji": "tsukuyomi",
     "category": "goddess",
+    "image_filename": "16_tsukuyomi.png",
+    "primary_color": "#a8b8d8",
+    "tagline": [
+      "月の如く、静かに人を導け。",
+      "天上の月より召喚されし、",
+      "神秘を司る女神の戦士。"
+    ],
     "file": "16-tsukuyomi.json"
   },
   {
     "claw_no": 17,
     "name_jp": "弁天",
     "name_en": "BENTEN",
+    "name_romaji": "benten",
     "category": "goddess",
+    "image_filename": "17_benten.png",
+    "primary_color": "#e88aaa",
+    "tagline": [
+      "弁天の如く、美と芸術で魅せよ。",
+      "霊山の湖より召喚されし、",
+      "芸術を司る美の女神。"
+    ],
     "file": "17-benten.json"
   },
   {
     "claw_no": 18,
     "name_jp": "観音",
     "name_en": "KANNON",
+    "name_romaji": "kannon",
     "category": "goddess",
+    "image_filename": "18_kannon.png",
+    "primary_color": "#e0c878",
+    "tagline": [
+      "観音の如く、慈愛で人を包み込め。",
+      "蓮の台座より召喚されし、",
+      "慈悲を司る慈愛の女神。"
+    ],
     "file": "18-kannon.json"
   },
   {
     "claw_no": 19,
     "name_jp": "紅唇",
     "name_en": "KOSHIN",
+    "name_romaji": "koshin",
     "category": "temptress",
+    "image_filename": "19_koshin.png",
+    "primary_color": "#e84878",
+    "tagline": [
+      "紅き唇の如く、人を惹きつけよ。",
+      "誘惑の領界より召喚されし、",
+      "刺激を司る小悪魔。"
+    ],
     "file": "19-koshin.json"
   },
   {
     "claw_no": 20,
     "name_jp": "黒猫",
     "name_en": "KURONEKO",
+    "name_romaji": "kuroneko",
     "category": "temptress",
+    "image_filename": "20_kuroneko.png",
+    "primary_color": "#7848a8",
+    "tagline": [
+      "黒猫の如く、気まぐれに拡散せよ。",
+      "夜の路地より召喚されし、",
+      "SNS拡散の小悪魔。"
+    ],
     "file": "20-kuroneko.json"
   },
   {
     "claw_no": 21,
     "name_jp": "妖精",
     "name_en": "YOSEI",
+    "name_romaji": "yosei",
     "category": "temptress",
+    "image_filename": "21_yosei.png",
+    "primary_color": "#b878d8",
+    "tagline": [
+      "妖精の如く、神秘の囁きで魅せよ。",
+      "霧の森より召喚されし、",
+      "神秘の口コミの使者。"
+    ],
     "file": "21-yosei.json"
   },
   {
     "claw_no": 22,
     "name_jp": "桃兎",
     "name_en": "MOMOUSA",
+    "name_romaji": "momousa",
     "category": "fluffy",
+    "image_filename": "22_momousa.png",
+    "primary_color": "#f098b8",
+    "tagline": [
+      "桃色の兎の如く、癒しで人を引き寄せよ。",
+      "桃源郷より召喚されし、",
+      "癒しを司るうさぎの戦士。"
+    ],
     "file": "22-momousa.json"
   },
   {
     "claw_no": 23,
     "name_jp": "雪羊",
     "name_en": "YUKIHITSUJI",
+    "name_romaji": "yukihitsuji",
     "category": "fluffy",
+    "image_filename": "23_yukihitsuji.png",
+    "primary_color": "#c8d8e8",
+    "tagline": [
+      "雪羊の如く、ふんわり包み込め。",
+      "雪原の牧場より召喚されし、",
+      "家族と日常を司る癒しの戦士。"
+    ],
     "file": "23-yukihitsuji.json"
   },
   {
     "claw_no": 24,
     "name_jp": "花栗鼠",
     "name_en": "HANARISU",
+    "name_romaji": "hanarisu",
     "category": "fluffy",
+    "image_filename": "24_hanarisu.png",
+    "primary_color": "#e89848",
+    "tagline": [
+      "花栗鼠の如く、元気で世界を駆け抜けよ。",
+      "花咲く木立より召喚されし、",
+      "若さと元気を司る友達戦士。"
+    ],
     "file": "24-hanarisu.json"
   },
   {
     "claw_no": 25,
     "name_jp": "真珠",
     "name_en": "SHINJU",
+    "name_romaji": "shinju",
     "category": "concierge",
+    "image_filename": "25_shinju.png",
+    "primary_color": "#e8e0d0",
+    "tagline": [
+      "真珠の如く、上品に磨き上げよ。",
+      "深海の貝殻より召喚されし、",
+      "高級を司る秘書の戦士。"
+    ],
     "file": "25-shinju.json"
   },
   {
     "claw_no": 26,
     "name_jp": "翡翠",
     "name_en": "HISUI",
+    "name_romaji": "hisui",
     "category": "concierge",
+    "image_filename": "26_hisui.png",
+    "primary_color": "#3a8a6a",
+    "tagline": [
+      "翡翠の如く、知性で道を照らせ。",
+      "玉の宝庫より召喚されし、",
+      "ビジネスを司る知性の秘書。"
+    ],
     "file": "26-hisui.json"
   },
   {
     "claw_no": 27,
     "name_jp": "紫水晶",
     "name_en": "SHISUI",
+    "name_romaji": "shisui",
     "category": "concierge",
+    "image_filename": "27_shisui.png",
+    "primary_color": "#9060d0",
+    "tagline": [
+      "紫水晶の如く、深き叡智で導け。",
+      "星の塔より召喚されし、",
+      "神秘を司る賢者の戦士。"
+    ],
     "file": "27-shisui.json"
   },
   {
     "claw_no": 28,
     "name_jp": "葵",
     "name_en": "AOI",
+    "name_romaji": "aoi",
     "category": "friend",
+    "image_filename": "28_aoi.png",
+    "primary_color": "#5aa8e8",
+    "tagline": [
+      "葵の如く、明るく親しみで繋げ。",
+      "青空の街角より召喚されし、",
+      "親友のような友達戦士。"
+    ],
     "file": "28-aoi.json"
   },
   {
     "claw_no": 29,
     "name_jp": "茜",
     "name_en": "AKANE",
+    "name_romaji": "akane",
     "category": "friend",
+    "image_filename": "29_akane.png",
+    "primary_color": "#e87038",
+    "tagline": [
+      "茜の如く、夕焼けの絆で繋げ。",
+      "祭り囃子の里より召喚されし、",
+      "地域コミュニティを司る友達戦士。"
+    ],
     "file": "29-akane.json"
   },
   {
     "claw_no": 30,
     "name_jp": "菫",
     "name_en": "SUMIRE",
+    "name_romaji": "sumire",
     "category": "friend",
+    "image_filename": "30_sumire.png",
+    "primary_color": "#a878d0",
+    "tagline": [
+      "菫の如く、優しき癒しで包み込め。",
+      "紫陽花の庭より召喚されし、",
+      "コミュニティを司る癒しの戦士。"
+    ],
     "file": "30-sumire.json"
   }
 ]

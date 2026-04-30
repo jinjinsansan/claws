@@ -1,0 +1,685 @@
+/* ============================================================================
+ * OPENCLAW Platform - Landing Page Styles
+ * ============================================================================
+ * 既存 openclaw_lp.html の重厚・荘厳系スタイル。SPEC-07 §10「既存デザインを大きく
+ * 変更しない」原則に従い、original CSS を Next.js Page にそのまま適用。
+ *
+ * グローバル変数・body 装飾は globals.css で定義済み。本ファイルは LP 専用セクション
+ * のスタイルのみを含む。
+ *
+ * 既知のタイポ修正（§7-12）: --bg-deep: #08 0202; → #080202; （正常値で globals.css に反映済）
+ * ============================================================================ */
+
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.lp-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at center 30%, rgba(139, 0, 0, 0.3) 0%, transparent 60%),
+    var(--bg-deep);
+}
+
+.lp-hero-mark {
+  color: var(--red-bright);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.6em;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: lpFadeIn 1.2s 0.3s forwards;
+}
+
+.lp-hero-mark::before,
+.lp-hero-mark::after {
+  content: '◆';
+  color: var(--gold);
+  margin: 0 18px;
+}
+
+.lp-hero-title {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(60px, 14vw, 200px);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  background: linear-gradient(180deg, var(--text-main) 0%, var(--red-flame) 70%, var(--red-blood) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-align: center;
+  text-shadow: 0 0 80px rgba(209, 2, 2, 0.4);
+  opacity: 0;
+  animation: lpHeroTitleIn 1.5s 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.lp-hero-jp {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(14px, 2vw, 22px);
+  color: var(--text-dim);
+  letter-spacing: 0.5em;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: lpFadeIn 1.2s 1.2s forwards;
+}
+
+.lp-hero-tagline {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px;
+  opacity: 0;
+  animation: lpFadeIn 1.2s 1.6s forwards;
+}
+
+.lp-hero-tagline-line {
+  display: block;
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 300;
+  color: var(--text-main);
+  letter-spacing: 0.15em;
+  line-height: 2;
+}
+
+.lp-hero-tagline-line.lp-accent {
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+.lp-hero-scroll {
+  margin-top: 60px;
+  color: var(--text-mute);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  opacity: 0;
+  animation: lpFadeIn 1.2s 2s forwards;
+}
+
+.lp-hero-scroll-line {
+  display: block;
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  margin: 15px auto 0;
+  animation: lpScrollLine 2s ease-in-out infinite;
+}
+
+@keyframes lpScrollLine {
+  0%, 100% { transform: scaleY(0.3); transform-origin: top; }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes lpFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes lpHeroTitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    letter-spacing: 0.3em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.05em;
+  }
+}
+
+
+/* ============================================
+   SECTION COMMON
+   ============================================ */
+.lp-section-wrap {
+  padding: 140px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.lp-section-mark {
+  text-align: center;
+  color: var(--red-bright);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  margin-bottom: 25px;
+}
+
+.lp-section-mark::before,
+.lp-section-mark::after {
+  content: '◆';
+  color: var(--gold);
+  margin: 0 15px;
+}
+
+.lp-section-title {
+  text-align: center;
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+.lp-section-title-jp {
+  text-align: center;
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(13px, 1.5vw, 18px);
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 80px;
+}
+
+
+/* ============================================
+   STORY SECTION
+   ============================================ */
+.lp-story {
+  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
+  position: relative;
+}
+
+.lp-story::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.lp-story::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.lp-story-text {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lp-story-paragraph {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 2.3;
+  color: var(--text-main);
+  margin-bottom: 40px;
+  letter-spacing: 0.08em;
+}
+
+.lp-story-paragraph .lp-em {
+  color: var(--gold-bright);
+  font-weight: 700;
+  border-bottom: 1px dashed var(--gold);
+  padding-bottom: 2px;
+}
+
+.lp-story-divider {
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+  margin: 50px auto;
+}
+
+
+/* ============================================
+   CHARACTERS SECTION (30 体ティーザー)
+   ============================================ */
+.lp-characters {
+  background: var(--bg-deep);
+}
+
+.lp-characters-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 80px;
+  color: var(--text-dim);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+
+.lp-character-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.lp-character-card {
+  position: relative;
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border: 1px solid var(--border-faint);
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.lp-character-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lp-character-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(209, 2, 2, 0.3);
+  z-index: 10;
+}
+
+.lp-character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.6s;
+  position: relative;
+  z-index: 1;
+}
+
+.lp-character-card:hover .lp-character-image {
+  transform: scale(1.08);
+}
+
+.lp-character-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid var(--red-bright);
+  padding: 3px 9px;
+  font-family: var(--font-bebas), 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  z-index: 5;
+}
+
+.lp-character-info {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+  padding: 12px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.lp-character-card:hover .lp-character-info {
+  opacity: 1;
+}
+
+.lp-character-name {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.lp-character-name-en {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--gold-bright);
+  letter-spacing: 0.15em;
+}
+
+
+/* ============================================
+   ABILITIES SECTION
+   ============================================ */
+.lp-abilities {
+  background: var(--bg-deep);
+}
+
+.lp-abilities-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lp-ability-card {
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border: 1px solid var(--border-faint);
+  padding: 50px 40px;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.lp-ability-card:hover {
+  border-color: var(--gold);
+  background: linear-gradient(145deg, rgba(139, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.lp-ability-mark {
+  color: var(--red-bright);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  margin-bottom: 18px;
+}
+
+.lp-ability-title {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 900;
+  font-size: clamp(20px, 2vw, 26px);
+  color: var(--text-main);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.lp-ability-desc {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+
+/* ============================================
+   GACHA SECTION (召喚の儀)
+   ============================================ */
+.lp-gacha {
+  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+  position: relative;
+}
+
+.lp-gacha::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.lp-gacha-text {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lp-gacha-paragraph {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 2.3;
+  color: var(--text-main);
+  margin-bottom: 40px;
+  letter-spacing: 0.08em;
+}
+
+.lp-gacha-paragraph .lp-em {
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+.lp-gacha-price-box {
+  margin: 80px auto 0;
+  max-width: 500px;
+  padding: 50px 40px;
+  border: 1px solid var(--gold);
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
+}
+
+.lp-gacha-price-box::before,
+.lp-gacha-price-box::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--gold);
+}
+
+.lp-gacha-price-box::before {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.lp-gacha-price-box::after {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+.lp-gacha-price-label {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.5em;
+  margin-bottom: 15px;
+}
+
+.lp-gacha-price-amount {
+  font-family: var(--font-bebas), 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 8vw, 96px);
+  color: var(--gold-bright);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.lp-gacha-price-currency {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  margin-bottom: 25px;
+}
+
+.lp-gacha-price-note {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.2em;
+}
+
+
+/* ============================================
+   COMMUNITY SECTION (コロニー)
+   ============================================ */
+.lp-community {
+  background: linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 100%);
+}
+
+.lp-community-text {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lp-community-paragraph {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 2.3;
+  color: var(--text-main);
+  margin-bottom: 40px;
+  letter-spacing: 0.08em;
+}
+
+.lp-community-paragraph .lp-em {
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.lp-cta {
+  background:
+    radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
+    var(--bg-deep);
+  text-align: center;
+  padding: 160px 20px;
+  border-top: 1px solid var(--border-faint);
+}
+
+.lp-cta-mark {
+  color: var(--red-bright);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  margin-bottom: 30px;
+}
+
+.lp-cta-mark::before,
+.lp-cta-mark::after {
+  content: '◆';
+  color: var(--gold);
+  margin: 0 15px;
+}
+
+.lp-cta-title {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(40px, 7vw, 96px);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 25px;
+}
+
+.lp-cta-jp {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(14px, 1.6vw, 20px);
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 60px;
+}
+
+.lp-cta-button {
+  display: inline-block;
+  padding: 24px 80px;
+  background: linear-gradient(135deg, var(--red-blood) 0%, var(--red-bright) 100%);
+  color: var(--text-main);
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.4em;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  position: relative;
+  transition: all 0.4s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.lp-cta-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--red-flame) 0%, var(--red-blood) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+}
+
+.lp-cta-button:hover::before {
+  opacity: 1;
+}
+
+.lp-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(209, 2, 2, 0.5);
+}
+
+.lp-cta-note {
+  margin-top: 40px;
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.2em;
+}
+
+
+/* ============================================
+   FOOTER (LP)
+   ============================================ */
+.lp-footer {
+  background: #000;
+  padding: 60px 20px 40px;
+  text-align: center;
+  border-top: 1px solid var(--border-faint);
+}
+
+.lp-footer-brand {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--red-bright);
+  letter-spacing: 0.4em;
+  margin-bottom: 10px;
+}
+
+.lp-footer-tagline {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.4em;
+  margin-bottom: 30px;
+}
+
+.lp-footer-copyright {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 10px;
+  color: var(--text-mute);
+  letter-spacing: 0.3em;
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+  .lp-character-grid { grid-template-columns: repeat(4, 1fr); }
+  .lp-abilities-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .lp-character-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .lp-section-wrap { padding: 80px 20px; }
+  .lp-ability-card { padding: 35px 25px; }
+  .lp-gacha-price-box { padding: 35px 25px; }
+}
+
+@media (max-width: 480px) {
+  .lp-character-grid { grid-template-columns: repeat(2, 1fr); }
+}

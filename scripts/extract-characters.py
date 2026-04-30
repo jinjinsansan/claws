@@ -285,7 +285,11 @@ def main():
                 "claw_no": char["claw_no"],
                 "name_jp": char["name_jp"],
                 "name_en": char["name_en"],
+                "name_romaji": char["name_romaji"],
                 "category": char["category"],
+                "image_filename": char["image_filename"],
+                "primary_color": char["primary_color"],
+                "tagline": char["tagline"],
                 "file": out_name,
             })
             print(f"  OK: {out_name}")
