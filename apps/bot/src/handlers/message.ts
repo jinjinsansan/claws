@@ -163,13 +163,48 @@ async function handleHpFlow(
 
     case "description":
       await updateSessionState(supabase, session.id, "idle", {});
-      await ctx.reply(
-        `${claw.name_jp}: 了解した。以下の内容で HP を生成する準備ができた。\n\n` +
-        `📋 商い名: ${state.business_name}\n` +
-        `📋 業種: ${state.business_type}\n` +
-        `📋 特徴: ${text}\n\n` +
-        `⚠️ HP 生成機能は Phase 5 で実装予定です。情報は保存しました。`
-      );
+
+      if (env.HP_GENERATOR_URL && env.HP_GENERATOR_API_KEY && session.user_id) {
+        await ctx.reply(
+          `${claw.name_jp}: 了解した。HP を生成する。少し待て。\n\n` +
+          `📋 商い名: ${state.business_name}\n` +
+          `📋 業種: ${state.business_type}\n` +
+          `📋 特徴: ${text}`
+        );
+        try {
+          const res = await fetch(`${env.HP_GENERATOR_URL}/generate`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${env.HP_GENERATOR_API_KEY}`,
+            },
+            body: JSON.stringify({
+              userId: session.user_id,
+              clawId: claw.id,
+              clawNo: 0,
+              businessName: state.business_name,
+              businessType: state.business_type,
+              businessDescription: text,
+            }),
+          });
+          const result = await res.json() as { url?: string; status?: string; error?: string };
+          if (result.url) {
+            await ctx.reply(`${claw.name_jp}: HP の生成を開始した。完了次第ここに連絡する。\n🔗 ${result.url}`);
+          } else {
+            await ctx.reply(`${claw.name_jp}: HP 生成の開始に失敗した。${result.error ?? ""}`);
+          }
+        } catch {
+          await ctx.reply(`${claw.name_jp}: HP Generator への接続に失敗した。後で試してくれ。`);
+        }
+      } else {
+        await ctx.reply(
+          `${claw.name_jp}: 了解した。HP を生成する準備ができた。\n\n` +
+          `📋 商い名: ${state.business_name}\n` +
+          `📋 業種: ${state.business_type}\n` +
+          `📋 特徴: ${text}\n\n` +
+          `⚠️ HP Generator Worker が未接続です。デプロイ後に利用可能になります。`
+        );
+      }
       break;
 
     default:

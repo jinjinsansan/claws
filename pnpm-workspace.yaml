@@ -2,6 +2,7 @@ packages:
   - 'apps/web'
   - 'packages/characters'
   - 'apps/bot'                         # Phase 4: Telegram Bot
+  - 'apps/workers/hp-generator'        # Phase 5: HP生成
   # 後続 Phase で追加:
   # - 'apps/workers/hp-generator'      # Phase 5: HP生成
   # - 'apps/workers/reward-calculator' # Phase 6: 紹介報酬
