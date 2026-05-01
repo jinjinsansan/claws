@@ -90,8 +90,8 @@ export default function PrivacyPage() {
               個人情報の取り扱いに関するお問い合わせは、下記までご連絡ください。
             </p>
             <p className="mt-2">
-              AI Builders Lab 運営事務局<br />
-              メール: info@ai-builders-lab.com（仮）
+              OPENCLAW Platform 運営事務局<br />
+              メール: info@openclaw.com（仮）
             </p>
           </section>
         </div>

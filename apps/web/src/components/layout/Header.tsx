@@ -2,34 +2,27 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-bg/80 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 w-full z-50 bg-bg-deep/80 backdrop-blur-md border-b border-border-faint">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
-        <Link href="/" className="font-serif text-xl font-bold text-primary">
-          AI Builders Lab
+        <Link href="/" className="font-cinzel text-xl font-bold text-gold">
+          OPENCLAW
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/#curriculum" className="text-text-muted hover:text-text-main transition-colors text-sm">
-            カリキュラム
+          <Link href="/claws" className="text-text-dim hover:text-text-main transition-colors text-sm">
+            Claws
           </Link>
-          <Link href="/#pricing" className="text-text-muted hover:text-text-main transition-colors text-sm">
-            料金プラン
+          <Link href="/academy" className="text-text-dim hover:text-text-main transition-colors text-sm">
+            Academy
           </Link>
-          <Link href="/#faq" className="text-text-muted hover:text-text-main transition-colors text-sm">
-            FAQ
-          </Link>
-          <Link href="/login" className="text-text-muted hover:text-text-main transition-colors text-sm">
+          <Link href="/login" className="text-text-dim hover:text-text-main transition-colors text-sm">
             ログイン
           </Link>
-          <Button href="/academy/launch/episode/1" className="text-sm py-2 px-5">
-            無料動画を見る
-          </Button>
         </nav>
 
         <button
@@ -48,14 +41,10 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav className="md:hidden bg-surface border-t border-border px-4 py-4 space-y-3">
-          <Link href="/#curriculum" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>カリキュラム</Link>
-          <Link href="/#pricing" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>料金プラン</Link>
-          <Link href="/#faq" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>FAQ</Link>
-          <Link href="/login" className="block text-text-muted hover:text-text-main" onClick={() => setMenuOpen(false)}>ログイン</Link>
-          <Button href="/academy/launch/episode/1" className="w-full text-center text-sm py-2">
-            無料動画を見る
-          </Button>
+        <nav className="md:hidden bg-bg-mid border-t border-border-faint px-4 py-4 space-y-3">
+          <Link href="/claws" className="block text-text-dim hover:text-text-main" onClick={() => setMenuOpen(false)}>Claws</Link>
+          <Link href="/academy" className="block text-text-dim hover:text-text-main" onClick={() => setMenuOpen(false)}>Academy</Link>
+          <Link href="/login" className="block text-text-dim hover:text-text-main" onClick={() => setMenuOpen(false)}>ログイン</Link>
         </nav>
       )}
     </header>

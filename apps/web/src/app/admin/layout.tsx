@@ -30,11 +30,11 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-bg text-text-main">
-      <header className="fixed top-0 w-full z-50 bg-bg/80 backdrop-blur-md border-b border-border">
+    <div className="min-h-screen bg-bg-deep text-text-main">
+      <header className="fixed top-0 w-full z-50 bg-bg-deep/80 backdrop-blur-md border-b border-border-faint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
-          <Link href="/admin" className="font-serif text-lg sm:text-xl font-bold text-primary">
-            Admin
+          <Link href="/admin" className="font-cinzel text-lg sm:text-xl font-bold text-gold">
+            OPENCLAW Admin
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/members/dashboard" className="hidden sm:block text-text-muted hover:text-text-main text-sm">

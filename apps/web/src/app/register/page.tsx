@@ -54,7 +54,7 @@ export default function RegisterPage() {
             会員登録
           </h1>
           <p className="text-text-muted text-center text-sm mb-6 sm:mb-8">
-            AI Builders Lab会員エリアへの登録
+            OPENCLAW 会員エリアへの登録
           </p>
 
           <form onSubmit={handleRegister} className="space-y-4 sm:space-y-5">

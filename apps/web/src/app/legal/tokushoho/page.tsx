@@ -17,7 +17,7 @@ export default function TokushohoPage() {
           <dl className="space-y-4">
             <div className="border-b border-border pb-4">
               <dt className="font-bold mb-1">販売事業者名</dt>
-              <dd className="text-text-muted">AI Builders Lab 運営事務局</dd>
+              <dd className="text-text-muted">OPENCLAW Platform 運営事務局</dd>
             </div>
             <div className="border-b border-border pb-4">
               <dt className="font-bold mb-1">代表者</dt>
@@ -33,7 +33,7 @@ export default function TokushohoPage() {
             </div>
             <div className="border-b border-border pb-4">
               <dt className="font-bold mb-1">メールアドレス</dt>
-              <dd className="text-text-muted">info@ai-builders-lab.com（仮）</dd>
+              <dd className="text-text-muted">info@openclaw.com（仮）</dd>
             </div>
             <div className="border-b border-border pb-4">
               <dt className="font-bold mb-1">販売価格</dt>
