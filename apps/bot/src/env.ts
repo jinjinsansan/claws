@@ -1,0 +1,12 @@
+export interface Env {
+  TELEGRAM_BOT_TOKEN: string;
+  TELEGRAM_BOT_USERNAME: string;
+  TELEGRAM_WEBHOOK_SECRET: string;
+  ANTHROPIC_API_KEY: string;
+  ANTHROPIC_MODEL: string;
+  SUPABASE_URL: string;
+  SUPABASE_SERVICE_ROLE_KEY: string;
+  HP_GENERATOR_URL?: string;
+  HP_GENERATOR_API_KEY?: string;
+  NOTIFICATION_API_KEY?: string;
+}
