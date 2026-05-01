@@ -1,0 +1,31 @@
+-- =============================================
+-- §9.1 初期管理者ユーザーのシード
+-- =============================================
+-- 注意: admin_users テーブルへの INSERT は、
+-- auth.users に該当ユーザーが登録された後に行う必要がある。
+-- Supabase Auth でユーザーを作成してから、以下を実行する。
+--
+-- 手順:
+-- 1. Supabase Dashboard → Authentication → Users でメール/パスワード登録
+-- 2. 登録された user_id を使って以下のSQL を実行
+--
+-- 実行例 (仁さんの user_id を埋める):
+-- INSERT INTO public.admin_users (user_id, role, granted_by)
+-- VALUES ('<仁さんの auth.users.id>', 'super_admin', '<同じ user_id>');
+
+-- プレースホルダー: 仁さんの Supabase Auth 登録後に実際の UUID を埋める
+-- DO $$
+-- DECLARE
+--   admin_uid UUID;
+-- BEGIN
+--   SELECT id INTO admin_uid FROM auth.users WHERE email = 'jin@openclaw.com' LIMIT 1;
+--   IF admin_uid IS NOT NULL THEN
+--     INSERT INTO public.admin_users (user_id, role, granted_by)
+--     VALUES (admin_uid, 'super_admin', admin_uid)
+--     ON CONFLICT (user_id) DO NOTHING;
+--   END IF;
+-- END $$;
+
+-- 上記をコメント解除し、メールアドレスを修正して実行してください。
+-- 重要: admin_users への INSERT は RLS が有効なので、
+-- Supabase Dashboard の SQL Editor (service_role) で実行すること。

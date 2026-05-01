@@ -17,4 +17,10 @@ describe("middleware config", () => {
   it("handles /register route", () => {
     expect(config.matcher).toContain("/register");
   });
+
+  it("covers public pages for referral cookie", () => {
+    expect(config.matcher).toContain("/");
+    expect(config.matcher).toContain("/claws");
+    expect(config.matcher).toContain("/claws/:slug*");
+  });
 });
