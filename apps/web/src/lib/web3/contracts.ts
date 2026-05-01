@@ -9,7 +9,7 @@ export const USDT_ADDRESS = (process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS ?? "0
 export const CLAWS_NFT_ADDRESS = (process.env.NEXT_PUBLIC_CLAWS_NFT_ADDRESS ?? "") as Address;
 export const REWARD_DISTRIBUTOR_ADDRESS = (process.env.NEXT_PUBLIC_REWARD_DISTRIBUTOR_ADDRESS ?? "") as Address;
 
-export const PRICE_USDT = 300_000_000n; // 300 USDT (6 decimals)
+export const PRICE_USDT = BigInt(300_000_000); // 300 USDT (6 decimals)
 
 export const USDT_ABI = [
   {

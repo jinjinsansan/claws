@@ -127,6 +127,7 @@ export function PurchaseFlow({ characterNo }: { characterNo: number }) {
     setStep("minting");
     writeMint({
       address: CLAWS_NFT_ADDRESS,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       abi: ClawsNFTAbi as any,
       functionName: "mintClaw",
       args: [characterNo, referrer],

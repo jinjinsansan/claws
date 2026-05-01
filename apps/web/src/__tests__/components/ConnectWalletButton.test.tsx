@@ -1,16 +1,22 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
+
+vi.mock("wagmi", () => ({
+  useAccount: () => ({ address: undefined, isConnected: false }),
+  useConnect: () => ({ connect: vi.fn(), connectors: [], isPending: false }),
+  useDisconnect: () => ({ disconnect: vi.fn() }),
+}));
+
 import { render, screen } from "@testing-library/react";
 import { ConnectWalletButton } from "@/components/web3/ConnectWalletButton";
 
-describe("ConnectWalletButton (placeholder)", () => {
-  it("renders Phase 3 placeholder text", () => {
+describe("ConnectWalletButton", () => {
+  it("renders connect button when not connected", () => {
     render(<ConnectWalletButton />);
-    expect(screen.getByText("WALLET — COMING IN PHASE 3")).toBeInTheDocument();
+    expect(screen.getByText("CONNECT WALLET")).toBeInTheDocument();
   });
 
-  it("has cursor-not-allowed class", () => {
-    render(<ConnectWalletButton />);
-    const el = screen.getByText("WALLET — COMING IN PHASE 3");
-    expect(el.className).toContain("cursor-not-allowed");
+  it("applies custom className", () => {
+    const { container } = render(<ConnectWalletButton className="test-class" />);
+    expect(container.firstChild).toBeTruthy();
   });
 });

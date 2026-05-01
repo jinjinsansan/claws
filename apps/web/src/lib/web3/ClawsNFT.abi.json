@@ -1,1 +1,1340 @@
-﻿ 笊ｭ-------------+-------------------------------------------------------------+--------------------------------------------------------------------笊ｮ | Type        | Signature                                                   | Selector                                                           | +================================================================================================================================================+ | event       | Approval(address,address,uint256)                           | 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925 | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | ApprovalForAll(address,address,bool)                        | 0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31 | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | BaseURIUpdated(string)                                      | 0x6741b2fc379fad678116fe3d4d4b9a1a184ab53ba36b86ad0fa66340b1ab41ad | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | BatchMetadataUpdate(uint256,uint256)                        | 0x6bd5c950a8d8df17f772f5af37cb3655737899cbf903264b9795592da439661c | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | CharacterMaxSupplyUpdated(uint8,uint256)                    | 0xddf717a5a490388a07b43b5662b20d128af6b1f205044ff25f3c9c54462d356c | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | CharacterMinted(uint256,address,uint8,address,uint256)      | 0xa2130340f36ade6391f434ebfd9a4beeb9bd67843ae2818d4f004052857461ed | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | MetadataUpdate(uint256)                                     | 0xf8e1a15aba9398e019f0b49df1a4fde98ee17ae345cb5f6b5e2c27f5033e8ce7 | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | MintingStatusChanged(bool)                                  | 0x41f386d449eec03c1c3b75bbba9c18df70aa19779ff47f68eab4b6a66fb399d4 | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | Paused(address)                                             | 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258 | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | RoleAdminChanged(bytes32,bytes32,bytes32)                   | 0xbd79b86ffe0ab8e8776151514217cd7cacd52c909f66475c3af44e129f0b00ff | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | RoleGranted(bytes32,address,address)                        | 0x2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | RoleRevoked(bytes32,address,address)                        | 0xf6391f5c32d9c69d2a47ea670b442974b53935d1edc7fd64eb21e047a839171b | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | TokenURIUpdated(uint256,string)                             | 0x931f495b9a8e5d8e61946ea5d61e021f636cfe213a801f97589c18c152e408bd | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | Transfer(address,address,uint256)                           | 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | TreasuryUpdated(address,address)                            | 0x4ab5be82436d353e61ca18726e984e561f5c1cc7c6d38b29d2553c790434705a | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | event       | Unpaused(address)                                           | 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | AccessControlBadConfirmation()                              | 0x6697b232                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | AccessControlUnauthorizedAccount(address,bytes32)           | 0xe2517d3f                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | CharacterMaxSupplyReached()                                 | 0x8f13cd79                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721EnumerableForbiddenBatchMint()                        | 0x59171fc1                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721IncorrectOwner(address,uint256,address)               | 0x64283d7b                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721InsufficientApproval(address,uint256)                 | 0x177e802f                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721InvalidApprover(address)                              | 0xa9fbf51f                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721InvalidOperator(address)                              | 0x5b08ba18                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721InvalidOwner(address)                                 | 0x89c62b64                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721InvalidReceiver(address)                              | 0x64a0ae92                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721InvalidSender(address)                                | 0x73c6ac6e                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721NonexistentToken(uint256)                             | 0x7e273289                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ERC721OutOfBoundsIndex(address,uint256)                     | 0xa57d13dc                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | EnforcedPause()                                             | 0xd93c0665                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ExpectedPause()                                             | 0x8dfc202b                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | InsufficientUSDTAllowance()                                 | 0x2b00292c                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | InsufficientUSDTBalance()                                   | 0x2d54e61d                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | InvalidAddress()                                            | 0xe6c4247b                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | InvalidCharacterNumber()                                    | 0x04e737a2                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | MintingDisabled()                                           | 0xaf79b437                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | ReentrancyGuardReentrantCall()                              | 0x3ee5aeb5                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | TokenDoesNotExist()                                         | 0xceea21b6                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | error       | TransferFailed()                                            | 0x90b8ec18                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | ADMIN_ROLE() view returns (bytes32)                         | 0x75b238fc                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | DEFAULT_ADMIN_ROLE() view returns (bytes32)                 | 0xa217fddf                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | METADATA_UPDATER_ROLE() view returns (bytes32)              | 0x89025750                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | PAUSER_ROLE() view returns (bytes32)                        | 0xe63ab1e9                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | PRICE_USDT() view returns (uint256)                         | 0x4d4b6e9f                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | TOTAL_CHARACTERS() view returns (uint8)                     | 0x7b97a7e1                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | approve(address,uint256) nonpayable                         | 0x095ea7b3                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | balanceOf(address) view returns (uint256)                   | 0x70a08231                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | characterMaxSupply(uint8) view returns (uint256)            | 0xd70787e5                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | charactersCount(uint8) view returns (uint256)               | 0x2aaf50ef                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | getApproved(uint256) view returns (address)                 | 0x081812fc                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | getOwnerClaws(address) view returns (uint256[])             | 0x8ead9a0a                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | getRoleAdmin(bytes32) view returns (bytes32)                | 0x248a9ca3                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | getTokenReferrer(uint256) view returns (address)            | 0x6911f026                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | grantRole(bytes32,address) nonpayable                       | 0x2f2ff15d                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | hasRole(bytes32,address) view returns (bool)                | 0x91d14854                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | isApprovedForAll(address,address) view returns (bool)       | 0xe985e9c5                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | mintClaw(uint8,address) nonpayable returns (uint256)        | 0x75539764                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | mintingEnabled() view returns (bool)                        | 0x9fd6db12                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | name() view returns (string)                                | 0x06fdde03                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | ownerOf(uint256) view returns (address)                     | 0x6352211e                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | ownsCharacter(address,uint8) view returns (bool)            | 0xa2242ece                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | pause() nonpayable                                          | 0x8456cb59                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | paused() view returns (bool)                                | 0x5c975abb                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | renounceRole(bytes32,address) nonpayable                    | 0x36568abe                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | revokeRole(bytes32,address) nonpayable                      | 0xd547741f                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | safeTransferFrom(address,address,uint256) nonpayable        | 0x42842e0e                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | safeTransferFrom(address,address,uint256,bytes) nonpayable  | 0xb88d4fde                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | setApprovalForAll(address,bool) nonpayable                  | 0xa22cb465                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | setBaseURI(string) nonpayable                               | 0x55f804b3                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | setCharacterMaxSupply(uint8,uint256) nonpayable             | 0x30a6be30                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | setMintingEnabled(bool) nonpayable                          | 0x4ea3871a                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | setTreasury(address) nonpayable                             | 0xf0f44260                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | supportsInterface(bytes4) view returns (bool)               | 0x01ffc9a7                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | symbol() view returns (string)                              | 0x95d89b41                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | tokenByIndex(uint256) view returns (uint256)                | 0x4f6ccce7                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | tokenOfOwnerByIndex(address,uint256) view returns (uint256) | 0x2f745c59                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | tokenReferrer(uint256) view returns (address)               | 0x6b1015e4                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | tokenToCharacter(uint256) view returns (uint8)              | 0x34120bd8                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | tokenURI(uint256) view returns (string)                     | 0xc87b56dd                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | totalSupply() view returns (uint256)                        | 0x18160ddd                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | transferFrom(address,address,uint256) nonpayable            | 0x23b872dd                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | treasuryAddress() view returns (address)                    | 0xc5f956af                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | unpause() nonpayable                                        | 0x3f4ba83a                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | updateTokenURI(uint256,string) nonpayable                   | 0x18e97fd1                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | function    | usdtToken() view returns (IERC20)                           | 0xa98ad46c                                                         | |-------------+-------------------------------------------------------------+--------------------------------------------------------------------| | constructor | constructor(address,address,string) nonpayable              |                                                                    | 笊ｰ-------------+-------------------------------------------------------------+--------------------------------------------------------------------笊ｯ 
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_usdtAddress",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_treasury",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseURI",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "ADMIN_ROLE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "DEFAULT_ADMIN_ROLE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "METADATA_UPDATER_ROLE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "PAUSER_ROLE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "PRICE_USDT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "TOTAL_CHARACTERS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "approve",
+    "inputs": [
+      {
+        "name": "to",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "balanceOf",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "characterMaxSupply",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "charactersCount",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getApproved",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getOwnerClaws",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]",
+        "internalType": "uint256[]"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getRoleAdmin",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getTokenReferrer",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "grantRole",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "hasRole",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "isApprovedForAll",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "mintClaw",
+    "inputs": [
+      {
+        "name": "characterNo",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "referrer",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "mintingEnabled",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "name",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "ownerOf",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "ownsCharacter",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "characterNo",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pause",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "paused",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "renounceRole",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "callerConfirmation",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "revokeRole",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "safeTransferFrom",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "safeTransferFrom",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setApprovalForAll",
+    "inputs": [
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "approved",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setBaseURI",
+    "inputs": [
+      {
+        "name": "newBaseURI",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setCharacterMaxSupply",
+    "inputs": [
+      {
+        "name": "characterNo",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "maxSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setMintingEnabled",
+    "inputs": [
+      {
+        "name": "enabled",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setTreasury",
+    "inputs": [
+      {
+        "name": "newTreasury",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "supportsInterface",
+    "inputs": [
+      {
+        "name": "interfaceId",
+        "type": "bytes4",
+        "internalType": "bytes4"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "symbol",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "tokenByIndex",
+    "inputs": [
+      {
+        "name": "index",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "tokenOfOwnerByIndex",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "index",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "tokenReferrer",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "tokenToCharacter",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "tokenURI",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalSupply",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "transferFrom",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "treasuryAddress",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "unpause",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateTokenURI",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "newURI",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "usdtToken",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IERC20"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "Approval",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "approved",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ApprovalForAll",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "approved",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BaseURIUpdated",
+    "inputs": [
+      {
+        "name": "newBaseURI",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "BatchMetadataUpdate",
+    "inputs": [
+      {
+        "name": "_fromTokenId",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_toTokenId",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "CharacterMaxSupplyUpdated",
+    "inputs": [
+      {
+        "name": "characterNo",
+        "type": "uint8",
+        "indexed": true,
+        "internalType": "uint8"
+      },
+      {
+        "name": "maxSupply",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "CharacterMinted",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "owner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "characterNo",
+        "type": "uint8",
+        "indexed": true,
+        "internalType": "uint8"
+      },
+      {
+        "name": "referrer",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "price",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "MetadataUpdate",
+    "inputs": [
+      {
+        "name": "_tokenId",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "MintingStatusChanged",
+    "inputs": [
+      {
+        "name": "enabled",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Paused",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RoleAdminChanged",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "previousAdminRole",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "newAdminRole",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RoleGranted",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "account",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "sender",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RoleRevoked",
+    "inputs": [
+      {
+        "name": "role",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "account",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "sender",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TokenURIUpdated",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newURI",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Transfer",
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TreasuryUpdated",
+    "inputs": [
+      {
+        "name": "oldTreasury",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newTreasury",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Unpaused",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "AccessControlBadConfirmation",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "AccessControlUnauthorizedAccount",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "neededRole",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "CharacterMaxSupplyReached",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ERC721EnumerableForbiddenBatchMint",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ERC721IncorrectOwner",
+    "inputs": [
+      {
+        "name": "sender",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721InsufficientApproval",
+    "inputs": [
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721InvalidApprover",
+    "inputs": [
+      {
+        "name": "approver",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721InvalidOperator",
+    "inputs": [
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721InvalidOwner",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721InvalidReceiver",
+    "inputs": [
+      {
+        "name": "receiver",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721InvalidSender",
+    "inputs": [
+      {
+        "name": "sender",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721NonexistentToken",
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ERC721OutOfBoundsIndex",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "index",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "EnforcedPause",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ExpectedPause",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InsufficientUSDTAllowance",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InsufficientUSDTBalance",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidCharacterNumber",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MintingDisabled",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ReentrancyGuardReentrantCall",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "TokenDoesNotExist",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "TransferFailed",
+    "inputs": []
+  }
+]

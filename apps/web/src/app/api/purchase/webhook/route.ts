@@ -24,11 +24,12 @@ export async function POST(request: NextRequest) {
       tokenId,
       characterNo,
       buyerWallet,
-      referrerWallet,
+      referrerWallet: _referrerWallet,
       transactionHash,
       blockNumber,
       amountUsdt,
     } = body;
+    void _referrerWallet;
 
     if (!tokenId || !characterNo || !buyerWallet || !transactionHash) {
       return NextResponse.json(
