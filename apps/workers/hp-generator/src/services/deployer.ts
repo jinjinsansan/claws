@@ -84,18 +84,33 @@ export async function deploySite(
   };
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function escapeJsonForScript(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
 function buildTemplateHtml(
   _template: TemplateName,
   content: SiteContent,
-  _siteId: string,
-  _env: Env
+  siteId: string,
+  env: Env
 ): string {
-  // MVP1: Server-rendered static HTML with content baked in
-  // Phase 2+ will use §7-7 dynamic /api/content approach
+  const fallbackContent = escapeJsonForScript(content);
+  const contentApiBase = (env.CONTENT_API_BASE_URL ?? "https://openclaw-hp-generator.workers.dev").replace(/\/$/, "");
+  const contentEndpoint = `${contentApiBase}/api/content/${siteId}`;
+
   const features = content.features
     ?.map(
       (f) =>
-        `<div class="feature"><h3>${f.title}</h3><p>${f.description}</p></div>`
+        `<div class="feature"><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.description)}</p></div>`
     )
     .join("\n") ?? "";
 
@@ -104,8 +119,8 @@ function buildTemplateHtml(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${content.meta?.title ?? content.heroTitle}</title>
-  <meta name="description" content="${content.meta?.description ?? ""}">
+  <title>${escapeHtml(content.meta?.title ?? content.heroTitle)}</title>
+  <meta name="description" content="${escapeHtml(content.meta?.description ?? "")}">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Noto Sans JP', sans-serif; color: #1a1a1a; }
@@ -130,25 +145,86 @@ function buildTemplateHtml(
 </head>
 <body>
   <section class="hero">
-    <h1>${content.heroTitle}</h1>
-    <h2>${content.heroSubtitle}</h2>
-    <p>${content.heroDescription}</p>
+    <h1 id="hero-title">${escapeHtml(content.heroTitle)}</h1>
+    <h2 id="hero-subtitle">${escapeHtml(content.heroSubtitle)}</h2>
+    <p id="hero-description">${escapeHtml(content.heroDescription)}</p>
   </section>
-  <section class="features">${features}</section>
+  <section class="features" id="features">${features}</section>
   <section class="about">
-    <h2>${content.about?.title ?? "私たちについて"}</h2>
-    <p>${content.about?.description ?? ""}</p>
-    ${content.about?.mission ? `<p style="margin-top:16px;color:#c9a84c;">${content.about.mission}</p>` : ""}
+    <h2 id="about-title">${escapeHtml(content.about?.title ?? "私たちについて")}</h2>
+    <p id="about-description">${escapeHtml(content.about?.description ?? "")}</p>
+    <p id="about-mission" style="margin-top:16px;color:#c9a84c;">${escapeHtml(content.about?.mission ?? "")}</p>
   </section>
   <section class="contact">
-    <h2>${content.contact?.title ?? "お問い合わせ"}</h2>
-    <p>${content.contact?.description ?? ""}</p>
-    ${content.contact?.email ? `<p><a href="mailto:${content.contact.email}">${content.contact.email}</a></p>` : ""}
+    <h2 id="contact-title">${escapeHtml(content.contact?.title ?? "お問い合わせ")}</h2>
+    <p id="contact-description">${escapeHtml(content.contact?.description ?? "")}</p>
+    <p id="contact-email-wrap">${content.contact?.email ? `<a id="contact-email" href="mailto:${escapeHtml(content.contact.email)}">${escapeHtml(content.contact.email)}</a>` : ""}</p>
   </section>
   <footer>
-    <p>${content.footer?.copyright ?? ""}</p>
+    <p id="footer-copyright">${escapeHtml(content.footer?.copyright ?? "")}</p>
     <p style="margin-top:8px;">Powered by <a href="https://openclaw.com">OPENCLAW</a></p>
   </footer>
+  <script>
+    (() => {
+      const fallback = ${fallbackContent};
+      const endpoint = ${JSON.stringify(contentEndpoint)};
+
+      const escapeHtml = (str) => String(str ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = String(value ?? "");
+      };
+
+      const render = (data) => {
+        const c = data ?? fallback;
+        setText("hero-title", c.heroTitle);
+        setText("hero-subtitle", c.heroSubtitle);
+        setText("hero-description", c.heroDescription);
+        setText("about-title", c.about?.title ?? "私たちについて");
+        setText("about-description", c.about?.description ?? "");
+        setText("about-mission", c.about?.mission ?? "");
+        setText("contact-title", c.contact?.title ?? "お問い合わせ");
+        setText("contact-description", c.contact?.description ?? "");
+        setText("footer-copyright", c.footer?.copyright ?? "");
+
+        const featuresEl = document.getElementById("features");
+        if (featuresEl && Array.isArray(c.features)) {
+          featuresEl.innerHTML = c.features
+            .map((f) => "<div class='feature'><h3>" + escapeHtml(f.title) + "</h3><p>" + escapeHtml(f.description) + "</p></div>")
+            .join("");
+        }
+
+        const emailWrap = document.getElementById("contact-email-wrap");
+        if (emailWrap) {
+          const email = c.contact?.email;
+          if (email) {
+            emailWrap.innerHTML = "<a id='contact-email' href='mailto:" + encodeURI(email) + "'>" + escapeHtml(email) + "</a>";
+          } else {
+            emailWrap.innerHTML = "";
+          }
+        }
+
+        if (c.meta?.title) document.title = c.meta.title;
+        if (c.meta?.description) {
+          const meta = document.querySelector("meta[name='description']");
+          if (meta) meta.setAttribute("content", c.meta.description);
+        }
+      };
+
+      render(fallback);
+
+      fetch(endpoint, { cache: "no-store" })
+        .then((res) => (res.ok ? res.json() : Promise.reject(new Error("content fetch failed"))))
+        .then((payload) => render(payload.content ?? fallback))
+        .catch(() => undefined);
+    })();
+  </script>
 </body>
 </html>`;
 }

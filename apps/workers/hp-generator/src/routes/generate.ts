@@ -54,6 +54,7 @@ export async function handleGenerate(c: Context<HonoEnv>) {
   const site = await createSite(supabase, {
     userId: body.userId,
     clawId: body.clawId,
+    nftTokenId: Number(nftToken.token_id),
     subdomain,
     businessName: body.businessName,
     businessType: body.businessType,
@@ -96,8 +97,8 @@ export async function handleGenerate(c: Context<HonoEnv>) {
         await supabase.from("audit_logs").insert({
           action: "hp_generated",
           actor_type: "system",
-          target_type: "user_site",
-          target_id: site.id,
+          entity_type: "user_site",
+          entity_id: site.id,
           metadata: { subdomain, templateName, url: siteUrl },
         });
       } catch (err) {

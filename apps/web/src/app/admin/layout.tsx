@@ -1,19 +1,8 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { isAdmin } from "@/lib/admin";
+import { isAdmin, checkAdminFromDb, adminNavItems } from "@/lib/admin";
 import AdminMobileNav from "@/components/layout/AdminMobileNav";
-
-const navItems = [
-  { href: "/admin", label: "ダッシュボード" },
-  { href: "/admin/announcements", label: "お知らせ" },
-  { href: "/admin/videos", label: "動画管理" },
-  { href: "/admin/materials", label: "資料管理" },
-  { href: "/admin/users", label: "会員管理" },
-  { href: "/admin/community", label: "コミュニティ" },
-  { href: "/admin/tickets", label: "サポート" },
-  { href: "/admin/jobs", label: "受発注" },
-];
 
 export default async function AdminLayout({
   children,
@@ -25,7 +14,11 @@ export default async function AdminLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user || !isAdmin(user.email)) {
+  if (!user) redirect("/");
+
+  // DB-backed admin check (admin_users table), with email fallback
+  const adminRole = await checkAdminFromDb(supabase, user.id);
+  if (!adminRole && !isAdmin(user.email)) {
     redirect("/");
   }
 
@@ -47,7 +40,7 @@ export default async function AdminLayout({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-8 sm:pb-16 flex gap-4 lg:gap-8">
         <aside className="w-52 shrink-0 hidden lg:block">
           <nav className="sticky top-20 space-y-1">
-            {navItems.map((item) => (
+            {adminNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

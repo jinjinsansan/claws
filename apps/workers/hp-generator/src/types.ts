@@ -8,6 +8,7 @@ export interface Env {
   CLOUDFLARE_ACCOUNT_ID: string;
   CLOUDFLARE_ZONE_ID: string;
   SITE_BASE_DOMAIN: string;
+  CONTENT_API_BASE_URL?: string;
 }
 
 export type SiteStatus = "draft" | "published" | "suspended";
@@ -40,6 +41,7 @@ export interface SiteRecord {
   id: string;
   user_id: string;
   claw_id: string;
+  nft_token_id: number;
   subdomain: string;
   business_name: string;
   business_type: string;

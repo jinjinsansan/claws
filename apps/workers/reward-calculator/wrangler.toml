@@ -1,0 +1,21 @@
+name = "openclaw-reward-calculator"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+[triggers]
+crons = ["0 15 * * *"]  # UTC 15:00 = JST 0:00
+
+[vars]
+USDT_CONTRACT_ADDRESS = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+CHAIN_ID = "137"
+MAX_BATCH_SIZE = "200"
+
+# Secrets (set via `wrangler secret put`):
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY
+# POLYGON_RPC_URL
+# PRIVATE_KEY_REWARD_DISTRIBUTOR
+# REWARD_CONTRACT_ADDRESS
+# TREASURY_ADDRESS
+# DISCORD_WEBHOOK_URL
+# API_SECRET (internal auth between services)

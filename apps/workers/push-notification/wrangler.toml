@@ -1,0 +1,25 @@
+name = "openclaw-push-notification"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+[triggers]
+crons = ["* * * * *"]  # every minute: process scheduled notifications
+
+[vars]
+RATE_LIMIT_PER_SECOND = "20"
+
+[[queues.producers]]
+queue = "openclaw-notification-queue"
+binding = "NOTIFICATION_QUEUE"
+
+[[queues.consumers]]
+queue = "openclaw-notification-queue"
+max_batch_size = 50
+max_batch_timeout = 30
+
+# Secrets (set via `wrangler secret put`):
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY
+# TELEGRAM_BOT_TOKEN
+# RESEND_API_KEY
+# API_SECRET

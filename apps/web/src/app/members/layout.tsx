@@ -1,13 +1,8 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { memberNavItems } from "@/lib/admin";
 
-/**
- * Members Layout - Phase 7 で本格実装予定
- *
- * 現状は認証チェックのみ行い、シンプルなレイアウトを提供。
- * NFT ベースのアクセス制御・会員ダッシュボードは Phase 7 で構築。
- */
 export default async function MembersLayout({
   children,
 }: {
@@ -22,7 +17,7 @@ export default async function MembersLayout({
     redirect("/login");
   }
 
-  const name = user.user_metadata?.name ?? "会員";
+  const name = user.user_metadata?.name ?? user.email?.split("@")[0] ?? "会員";
 
   return (
     <div className="min-h-screen bg-bg-deep text-text-main">
@@ -34,8 +29,21 @@ export default async function MembersLayout({
           <span className="text-text-dim text-sm">{name} さん</span>
         </div>
       </header>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <main>{children}</main>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-8 sm:pb-16 flex gap-4 lg:gap-8">
+        <aside className="w-48 shrink-0 hidden lg:block">
+          <nav className="sticky top-20 space-y-1">
+            {memberNavItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block px-4 py-2.5 rounded-lg text-sm text-text-muted hover:text-text-main hover:bg-surface transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </aside>
+        <main className="flex-1 min-w-0">{children}</main>
       </div>
     </div>
   );

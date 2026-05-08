@@ -24,18 +24,90 @@ export function PurchaseFlow({ characterNo }: { characterNo: number }) {
   const [step, setStep] = useState<Step>("check");
   const [errorMsg, setErrorMsg] = useState("");
   const [referrer, setReferrer] = useState<`0x${string}` | null>(null);
+  const [referrerLoading, setReferrerLoading] = useState(true);
+  const [walletLinked, setWalletLinked] = useState(false);
+  const [walletLinking, setWalletLinking] = useState(false);
+
+  const treasury = process.env.NEXT_PUBLIC_TREASURY_ADDRESS as `0x${string}` | undefined;
 
   // Read referral cookie
   useEffect(() => {
-    const cookies = document.cookie.split(";").map((c) => c.trim());
-    const refCookie = cookies.find((c) => c.startsWith("oc_ref="));
-    if (refCookie) {
-      // Resolve referrer code to address via API (Phase 7 will implement full resolution)
-      // For now, use treasury as default
+    const resolveReferrer = async () => {
+      setReferrerLoading(true);
+      setReferrer(treasury ?? null);
+
+      const cookies = document.cookie.split(";").map((c) => c.trim());
+      const refCookie = cookies.find((c) => c.startsWith("oc_ref="));
+      if (!refCookie) {
+        setReferrerLoading(false);
+        return;
+      }
+
+      const code = decodeURIComponent(refCookie.slice("oc_ref=".length)).trim();
+      if (!code) {
+        setReferrerLoading(false);
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/referrer/${encodeURIComponent(code)}`);
+        if (res.ok) {
+          const data = (await res.json()) as { walletAddress?: `0x${string}` };
+          if (data.walletAddress) {
+            setReferrer(data.walletAddress);
+          }
+        }
+      } catch {
+        // Keep treasury fallback
+      } finally {
+        setReferrerLoading(false);
+      }
+    };
+
+    void resolveReferrer();
+  }, [treasury]);
+
+  const ensureWalletLinked = async (): Promise<boolean> => {
+    if (!address) {
+      setWalletLinked(false);
+      return false;
     }
-    const treasury = process.env.NEXT_PUBLIC_TREASURY_ADDRESS as `0x${string}` | undefined;
-    setReferrer(treasury ?? null);
-  }, []);
+
+    setWalletLinking(true);
+    try {
+      const res = await fetch("/api/wallets/link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ walletAddress: address }),
+      });
+      if (res.ok) {
+        setWalletLinked(true);
+        return true;
+      }
+
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      setWalletLinked(false);
+      setErrorMsg(data.error ?? "ウォレット紐付けに失敗しました。ログイン状態を確認してください。");
+      setStep("error");
+      return false;
+    } catch {
+      setWalletLinked(false);
+      setErrorMsg("ウォレット紐付けに失敗しました。通信状態を確認してください。");
+      setStep("error");
+      return false;
+    } finally {
+      setWalletLinking(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!address) {
+      setWalletLinked(false);
+      return;
+    }
+    void ensureWalletLinked();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address]);
 
   // USDT balance
   const { data: balance } = useReadContract({
@@ -118,12 +190,16 @@ export function PurchaseFlow({ characterNo }: { characterNo: number }) {
     });
   };
 
-  const handleMint = () => {
+  const handleMint = async () => {
     if (!referrer) {
       setErrorMsg("紹介者アドレスが未設定です。");
       setStep("error");
       return;
     }
+
+    const linked = await ensureWalletLinked();
+    if (!linked) return;
+
     setStep("minting");
     writeMint({
       address: CLAWS_NFT_ADDRESS,
@@ -178,17 +254,25 @@ export function PurchaseFlow({ characterNo }: { characterNo: number }) {
         </button>
       ) : (
         <button
-          onClick={handleMint}
-          disabled={isMintPending || step === "minting"}
+          onClick={() => void handleMint()}
+          disabled={isMintPending || step === "minting" || walletLinking || referrerLoading}
           className="w-full sm:w-auto px-8 py-4 bg-red-blood hover:bg-red-bright text-text-main font-bold font-cinzel tracking-wider rounded border border-gold/40 transition-all disabled:opacity-50"
         >
-          {step === "minting" ? "召喚中..." : "SUMMON — 300 USDT"}
+          {step === "minting"
+            ? "召喚中..."
+            : walletLinking
+              ? "ウォレット紐付け中..."
+              : referrerLoading
+                ? "紹介者確認中..."
+                : "SUMMON — 300 USDT"}
         </button>
       )}
       <p className="text-text-mute text-xs">
         {needsApproval
           ? "まず USDT の使用を承認してから召喚できます。"
-          : "ボタンを押すとウォレットで取引の確認が求められます。"}
+          : walletLinked
+            ? "ボタンを押すとウォレットで取引の確認が求められます。"
+            : "購入前にウォレット紐付けを確認しています。ログイン済みの状態でお試しください。"}
       </p>
     </div>
   );

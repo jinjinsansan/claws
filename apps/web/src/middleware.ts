@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
     supabaseResponse.cookies.set(REFERRAL_COOKIE, ref, {
       path: "/",
       maxAge: REFERRAL_MAX_AGE,
-      httpOnly: true,
+      httpOnly: false,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
     });
@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
             supabaseResponse.cookies.set(REFERRAL_COOKIE, ref, {
               path: "/",
               maxAge: REFERRAL_MAX_AGE,
-              httpOnly: true,
+              httpOnly: false,
               sameSite: "lax",
               secure: process.env.NODE_ENV === "production",
             });

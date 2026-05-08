@@ -1,0 +1,15 @@
+name = "openclaw-backup"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+[triggers]
+crons = ["0 17 * * *"]  # UTC 17:00 = JST 02:00 (daily after nft-sync)
+
+[[r2_buckets]]
+binding = "BACKUP_BUCKET"
+bucket_name = "openclaw-backups"
+
+# Secrets (set via `wrangler secret put`):
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY
+# API_SECRET

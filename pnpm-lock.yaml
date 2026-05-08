@@ -119,6 +119,56 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@20.19.39)(jsdom@25.0.1(bufferutil@4.1.0)(utf-8-validate@5.0.10))
 
+  apps/workers/hp-generator:
+    dependencies:
+      '@anthropic-ai/sdk':
+        specifier: ^0.32.0
+        version: 0.32.1
+      '@supabase/supabase-js':
+        specifier: ^2.45.0
+        version: 2.105.1(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      hono:
+        specifier: ^4.6.0
+        version: 4.12.16
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20241022.0
+        version: 4.20260501.1
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@20.19.39)(jsdom@25.0.1(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      wrangler:
+        specifier: ^3.80.0
+        version: 3.114.17(@cloudflare/workers-types@4.20260501.1)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+
+  apps/workers/reward-calculator:
+    dependencies:
+      '@supabase/supabase-js':
+        specifier: ^2.45.0
+        version: 2.105.1(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      hono:
+        specifier: ^4.6.0
+        version: 4.12.16
+      viem:
+        specifier: ^2.21.0
+        version: 2.48.7(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.4.1)
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20241022.0
+        version: 4.20260501.1
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@20.19.39)(jsdom@25.0.1(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      wrangler:
+        specifier: ^3.80.0
+        version: 3.114.17(@cloudflare/workers-types@4.20260501.1)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+
   packages/characters: {}
 
 packages:
@@ -7628,6 +7678,11 @@ snapshots:
       typescript: 5.9.3
       zod: 3.25.76
 
+  abitype@1.2.3(typescript@5.9.3)(zod@4.4.1):
+    optionalDependencies:
+      typescript: 5.9.3
+      zod: 4.4.1
+
   abitype@1.2.4(typescript@5.9.3)(zod@3.25.76):
     optionalDependencies:
       typescript: 5.9.3
@@ -9432,6 +9487,21 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
+  ox@0.14.20(typescript@5.9.3)(zod@4.4.1):
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.1
+      '@noble/ciphers': 1.3.0
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.2.3(typescript@5.9.3)(zod@4.4.1)
+      eventemitter3: 5.0.1
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - zod
+
   ox@0.6.7(typescript@5.9.3)(zod@3.25.76):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
@@ -10451,6 +10521,23 @@ snapshots:
       abitype: 1.2.3(typescript@5.9.3)(zod@3.25.76)
       isows: 1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))
       ox: 0.14.20(typescript@5.9.3)(zod@3.25.76)
+      ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+
+  viem@2.48.7(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.4.1):
+    dependencies:
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.2.3(typescript@5.9.3)(zod@4.4.1)
+      isows: 1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      ox: 0.14.20(typescript@5.9.3)(zod@4.4.1)
       ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
     optionalDependencies:
       typescript: 5.9.3

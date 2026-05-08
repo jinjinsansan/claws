@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { createClient } from "@/lib/supabase/client";
+import { ConnectWalletButton } from "@/components/web3/ConnectWalletButton";
+import { useAccount, useSignMessage } from "wagmi";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,6 +15,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [walletLoading, setWalletLoading] = useState(false);
+  const { address, isConnected } = useAccount();
+  const { signMessageAsync } = useSignMessage();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +38,50 @@ export default function LoginPage() {
 
     router.push("/members/dashboard");
     router.refresh();
+  };
+
+  const handleWalletLogin = async () => {
+    if (!isConnected || !address) {
+      setError("先にウォレットを接続してください");
+      return;
+    }
+
+    setWalletLoading(true);
+    setError(null);
+
+    try {
+      const nonceRes = await fetch("/api/auth/wallet/nonce", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ walletAddress: address }),
+      });
+      const nonceData = (await nonceRes.json().catch(() => ({}))) as { message?: string; nonce?: string; error?: string };
+      if (!nonceRes.ok || !nonceData.message || !nonceData.nonce) {
+        throw new Error(nonceData.error ?? "署名ログインの初期化に失敗しました");
+      }
+
+      const signature = await signMessageAsync({ message: nonceData.message });
+
+      const verifyRes = await fetch("/api/auth/wallet/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          walletAddress: address,
+          nonce: nonceData.nonce,
+          signature,
+        }),
+      });
+      const verifyData = (await verifyRes.json().catch(() => ({}))) as { actionLink?: string; error?: string };
+      if (!verifyRes.ok || !verifyData.actionLink) {
+        throw new Error(verifyData.error ?? "署名ログインの検証に失敗しました");
+      }
+
+      window.location.href = verifyData.actionLink;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "ウォレットログインに失敗しました";
+      setError(message);
+      setWalletLoading(false);
+    }
   };
 
   return (
@@ -88,6 +137,23 @@ export default function LoginPage() {
               {loading ? "ログイン中..." : "ログイン"}
             </button>
           </form>
+
+          <div className="my-6 border-t border-border pt-6">
+            <p className="text-text-muted text-sm text-center mb-4">
+              またはウォレット署名でログイン
+            </p>
+            <div className="flex justify-center mb-4">
+              <ConnectWalletButton />
+            </div>
+            <button
+              type="button"
+              onClick={handleWalletLogin}
+              disabled={walletLoading || !isConnected}
+              className="w-full bg-red-blood hover:bg-red-bright text-text-main font-bold py-3 rounded-lg transition-colors disabled:opacity-50"
+            >
+              {walletLoading ? "署名ログイン中..." : "ウォレット署名ログイン"}
+            </button>
+          </div>
 
           <p className="text-text-muted text-sm text-center mt-6">
             アカウントをお持ちでない方は{" "}

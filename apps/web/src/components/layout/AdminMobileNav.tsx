@@ -2,17 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
-const navItems = [
-  { href: "/admin", label: "ダッシュボード" },
-  { href: "/admin/announcements", label: "お知らせ" },
-  { href: "/admin/videos", label: "動画管理" },
-  { href: "/admin/materials", label: "資料管理" },
-  { href: "/admin/users", label: "会員管理" },
-  { href: "/admin/community", label: "コミュニティ" },
-  { href: "/admin/tickets", label: "サポート" },
-  { href: "/admin/jobs", label: "受発注" },
-];
+import { adminNavItems } from "@/lib/admin";
 
 export default function AdminMobileNav() {
   const [open, setOpen] = useState(false);
@@ -35,7 +25,7 @@ export default function AdminMobileNav() {
 
       {open && (
         <nav className="lg:hidden fixed top-14 sm:top-16 left-0 right-0 z-40 bg-surface border-b border-border px-4 sm:px-6 py-3 space-y-1">
-          {navItems.map((item) => (
+          {adminNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}

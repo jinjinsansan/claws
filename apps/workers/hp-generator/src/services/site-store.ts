@@ -6,6 +6,7 @@ export async function createSite(
   params: {
     userId: string;
     clawId: string;
+    nftTokenId: number;
     subdomain: string;
     businessName: string;
     businessType: string;
@@ -18,6 +19,7 @@ export async function createSite(
     .insert({
       user_id: params.userId,
       claw_id: params.clawId,
+      nft_token_id: params.nftTokenId,
       subdomain: params.subdomain,
       business_name: params.businessName,
       business_type: params.businessType,
@@ -97,9 +99,10 @@ export async function suspendSite(
 }
 
 export function generateSubdomain(businessName: string, userId: string): string {
+  // DNS subdomains must be [a-z0-9-] only (SPEC-05 §4.5)
   const slug = businessName
     .toLowerCase()
-    .replace(/[^a-z0-9\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/g, "")
+    .replace(/[^a-z0-9]/g, "")
     .slice(0, 20);
   const hash = userId.slice(0, 8);
   return `${slug || "site"}-${hash}`;

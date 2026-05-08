@@ -3,6 +3,10 @@ packages:
   - 'packages/characters'
   - 'apps/bot'                         # Phase 4: Telegram Bot
   - 'apps/workers/hp-generator'        # Phase 5: HP生成
+  - 'apps/workers/reward-calculator'   # Phase 6: 紹介報酬
+  - 'apps/workers/push-notification'   # Phase 7: プッシュ通知
+  - 'apps/workers/nft-sync'            # Phase 8: NFT同期
+  - 'apps/workers/backup'              # Phase 8: バックアップ
   # 後続 Phase で追加:
   # - 'apps/workers/hp-generator'      # Phase 5: HP生成
   # - 'apps/workers/reward-calculator' # Phase 6: 紹介報酬

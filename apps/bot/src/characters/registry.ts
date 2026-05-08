@@ -10,7 +10,7 @@ export async function getAllClaws(supabase: SupabaseClient): Promise<ClawRecord[
 
   const { data, error } = await supabase
     .from("claws")
-    .select("id, claw_no, name_jp, name_en, name_romaji, category, dossier, image_url")
+    .select("id, claw_no, name_jp, name_en, name_romaji, category, dossier, image_url:image_filename")
     .order("claw_no", { ascending: true });
 
   if (error) throw new Error(`Failed to load claws: ${error.message}`);

@@ -6,6 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
 SITE_BASE_DOMAIN = "claws.openclaw.com"
+CONTENT_API_BASE_URL = "https://openclaw-hp-generator.workers.dev"
 
 # Secrets (set via wrangler secret put):
 # HP_GENERATOR_API_KEY

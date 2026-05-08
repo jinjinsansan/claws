@@ -9,6 +9,10 @@ ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
 # Secrets (set via wrangler secret put):
 # TELEGRAM_BOT_TOKEN
 # TELEGRAM_WEBHOOK_SECRET
+# TELEGRAM_BOT_USERNAME
 # ANTHROPIC_API_KEY
 # SUPABASE_URL
 # SUPABASE_SERVICE_ROLE_KEY
+# HP_GENERATOR_URL         (e.g. https://openclaw-hp-generator.workers.dev)
+# HP_GENERATOR_API_KEY
+# NOTIFICATION_API_KEY

@@ -9,14 +9,34 @@ import { buildSystemPrompt } from "../characters/system-prompts.js";
 import { checkTone } from "../characters/tone-guard.js";
 import { detectIntent } from "../services/intent-service.js";
 import { saveMessage, getHistory } from "../services/conversation-service.js";
+import { formatAcademyReply, searchAcademyPhrases } from "../services/academy-service.js";
 
 const MAX_TONE_RETRIES = 2;
+const MAX_MESSAGES_PER_MINUTE = 10;
+const rateLimitMap = new Map<number, { count: number; resetAt: number }>();
+
+function checkRateLimit(userId: number): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(userId);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(userId, { count: 1, resetAt: now + 60_000 });
+    return true;
+  }
+  if (entry.count >= MAX_MESSAGES_PER_MINUTE) return false;
+  entry.count++;
+  return true;
+}
 
 export function createMessageHandler(env: Env) {
   return async (ctx: Context) => {
     const from = ctx.from;
     const text = ctx.message?.text;
     if (!from || !text) return;
+
+    if (!checkRateLimit(from.id)) {
+      await ctx.reply("メッセージの送信が速すぎます。1分後にもう一度お試しください。");
+      return;
+    }
 
     const supabase = getSupabase(env);
     const session = await getOrCreateSession(supabase, from.id, ctx.chat?.id ?? from.id);
@@ -52,6 +72,7 @@ export function createMessageHandler(env: Env) {
       await ctx.reply(
         "⚔️ OPENCLAW Bot の使い方:\n\n" +
         "/colony — コロニー（Claw 切り替え）\n" +
+        "/select <番号> — Claw を番号で切り替え\n" +
         "/status — アカウント状態\n" +
         "/help — この画面\n\n" +
         "自由に話しかけると、あなたの Claw が商いのアドバイスをします。\n" +
@@ -61,12 +82,18 @@ export function createMessageHandler(env: Env) {
     }
 
     if (intent === "switch_claw") {
-      await ctx.reply("/colony コマンドで Claw を切り替えられます。");
+      await ctx.reply("/colony か /select <番号> で Claw を切り替えられます。");
       return;
     }
 
     if (intent === "post_sns") {
       await ctx.reply("SNS 投稿機能は MVP2 で実装予定です。もうしばらくお待ちください！");
+      return;
+    }
+
+    if (intent === "academy") {
+      const phrases = await searchAcademyPhrases(supabase, text);
+      await ctx.reply(formatAcademyReply(claw.name_jp, phrases));
       return;
     }
 
@@ -136,7 +163,7 @@ async function handleHpFlow(
   ctx: Context,
   env: Env,
   session: { id: string; user_id: string | null; state_data: Record<string, unknown> },
-  claw: { id: string; name_jp: string; dossier: Record<string, string> },
+  claw: { id: string; claw_no: number; name_jp: string; dossier: Record<string, string> },
   text: string
 ): Promise<void> {
   const supabase = getSupabase(env);
@@ -181,7 +208,7 @@ async function handleHpFlow(
             body: JSON.stringify({
               userId: session.user_id,
               clawId: claw.id,
-              clawNo: 0,
+              clawNo: claw.claw_no ?? 1,
               businessName: state.business_name,
               businessType: state.business_type,
               businessDescription: text,

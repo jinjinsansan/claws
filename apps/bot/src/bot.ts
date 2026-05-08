@@ -6,6 +6,7 @@ import { createCallbackHandler } from "./handlers/callback.js";
 import { createMessageHandler } from "./handlers/message.js";
 import { createHelpHandler } from "./handlers/help.js";
 import { createStatusHandler } from "./handlers/status.js";
+import { createSelectHandler } from "./handlers/select.js";
 
 export function createBot(env: Env): Bot {
   const bot = new Bot(env.TELEGRAM_BOT_TOKEN);
@@ -13,6 +14,7 @@ export function createBot(env: Env): Bot {
   // Commands
   bot.command("start", createStartHandler(env));
   bot.command("colony", createColonyHandler(env));
+  bot.command("select", createSelectHandler(env));
   bot.command("help", createHelpHandler());
   bot.command("status", createStatusHandler(env));
 

@@ -1,12 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { Env } from "../env.js";
 
-let cachedClient: Anthropic | null = null;
-
 export function getClaude(env: Env): Anthropic {
-  if (cachedClient) return cachedClient;
-  cachedClient = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
-  return cachedClient;
+  return new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
 }
 
 export interface LlmResponse {

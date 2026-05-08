@@ -7,6 +7,7 @@ export function createHelpHandler() {
       "📜 コマンド一覧:\n" +
       "/start <コード> — ウォレット紐付け\n" +
       "/colony — コロニー（Claw 切り替え）\n" +
+      "/select <番号> — Claw を番号指定で切り替え\n" +
       "/status — アカウント情報\n" +
       "/help — この画面\n\n" +
       "💬 会話:\n" +
