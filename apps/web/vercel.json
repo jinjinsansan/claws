@@ -1,0 +1,6 @@
+{
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm run build --filter=@openclaw/web",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}
